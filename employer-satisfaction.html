@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Satisfaction &mdash; NCDPI EPP Dashboard</title>
+
+  <!--
+    Employer Satisfaction — Dashboard Notes
+    ============================
+    Dashboard notes for the NCDPI EPP Employer Satisfaction dashboard.
+    Embedded in Tableau via a GitHub Pages URL as a web object.
+
+    Stylesheet: Inlined from dashboard-notes.css (2026-03-01)
+    Last updated: 2026-03-02
+  -->
+
+  <style>
+    /*
+      Inlined from dashboard-notes.css — 2026-03-01
+      Canonical source: _Reference/_StyleGuide/dashboard-notes.css
+    */
+
+    /* --- Reset & Base ---------------------------------------------------- */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 14px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #FFFFFF;
+      padding: 1.5rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* --- Typography ------------------------------------------------------ */
+
+    h1, h2, h3, h4 {
+      color: #003A70;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid #003A70;
+      margin-top: 0;
+    }
+
+    h1 .subtitle {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: normal;
+      color: #666666;
+      margin-top: 0.2rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding-bottom: 0.25rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #922880;
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+
+    /* --- Links ----------------------------------------------------------- */
+
+    a {
+      color: #003A70;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #922880;
+    }
+
+    /* --- Lists ----------------------------------------------------------- */
+
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    li > ul, li > ol {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* --- Tables ---------------------------------------------------------- */
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    thead th {
+      background-color: #003A70;
+      color: #FFFFFF;
+      font-weight: bold;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+    }
+
+    tbody td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #E6E6E6;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #F7F6F3;
+    }
+
+    tbody tr:hover {
+      background-color: #E8F4F8;
+    }
+
+    tbody td:first-child {
+      font-weight: bold;
+      color: #003A70;
+      white-space: nowrap;
+    }
+
+    /* --- Callout Boxes --------------------------------------------------- */
+
+    .callout {
+      background-color: #E8F4F8;
+      border-left: 4px solid #29B5D9;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .callout.warning {
+      background-color: #FDF0E8;
+      border-left-color: #B33A12;
+    }
+
+    .callout.tip {
+      background-color: #EAF5F0;
+      border-left-color: #077890;
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* --- Definition Lists ------------------------------------------------ */
+
+    dl {
+      margin: 1rem 0;
+    }
+
+    dt {
+      font-weight: bold;
+      color: #003A70;
+      font-size: 1.05rem;
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    dt:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    dd {
+      margin-left: 0;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    dd ul {
+      margin-top: 0.35rem;
+    }
+
+    /* --- Changelog ------------------------------------------------------- */
+
+    .changelog {
+      background-color: #F7F6F3;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .changelog h2 {
+      font-size: 1.1rem;
+      color: #922880;
+      border-bottom: none;
+      margin-top: 0;
+    }
+
+    .changelog h3 {
+      font-size: 0.95rem;
+      color: #003A70;
+      border-bottom: none;
+      margin-top: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .changelog .date {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 0.25rem;
+    }
+
+    .changelog ul {
+      margin-left: 1.25rem;
+      margin-top: 0.25rem;
+    }
+
+    /* --- Badge ----------------------------------------------------------- */
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      background-color: #003A70;
+      color: #FFFFFF;
+      vertical-align: middle;
+      margin-left: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge.updated {
+      background-color: #922880;
+    }
+
+    /* --- Horizontal Rule ------------------------------------------------- */
+
+    hr {
+      border: none;
+      border-top: 1px solid #CCCCCC;
+      margin: 1.5rem 0;
+    }
+
+    /* --- Footer ---------------------------------------------------------- */
+
+    .last-updated {
+      font-size: 0.8rem;
+      color: #999999;
+      text-align: right;
+      margin-top: 2rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    /* --- Print ----------------------------------------------------------- */
+
+    @media print {
+      body { padding: 0; font-size: 11pt; }
+      h1 { border-bottom-color: #000000; }
+      thead th {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000;
+      }
+      .callout {
+        border-left-width: 3px;
+        background-color: #FFFFFF !important;
+      }
+      dt { color: #000000; }
+      a { color: #000000; }
+    }
+
+    /* --- Responsive ------------------------------------------------------ */
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; font-size: 13px; }
+      table { font-size: 0.85rem; }
+      tbody td:first-child { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    Employer Satisfaction
+    <span class="subtitle">Principal survey results on beginning teacher effectiveness</span>
+  </h1>
+
+  <h2>Overview</h2>
+  <p>This dashboard shows results from the annual employer satisfaction survey administered each spring to principals of beginning teachers in North Carolina public schools, including charters. Principals rate each beginning teacher they supervise on a variety of teaching tasks, relative to other teachers with comparable experience.</p>
+
+  <h2>Who Is Included</h2>
+  <p>The survey goes to principals of the same teachers who receive the candidate satisfaction survey &mdash; those teaching for the first time following program completion. Prior to 2022, principals of alternate-route candidates who had not yet completed their programs also received the survey.</p>
+
+  <h2>Data Source</h2>
+  <p>Survey rosters are built by matching EPP candidate enrollment rosters to NCDPI payroll files. The survey is administered by email. The dashboard covers the most recent five years of results.</p>
+
+  <h2>How Results Are Reported</h2>
+  <p>On each item, principals rate the beginning teacher&rsquo;s effectiveness relative to other teachers with comparable experience using the following scale: <em>Not Applicable, Much Less, Less, Comparable, More, Much More</em>. When displaying aggregated results, the dashboard reports the percentage of responses answered &ldquo;Comparable,&rdquo; &ldquo;More,&rdquo; or &ldquo;Much More.&rdquo;</p>
+  <p>The survey items have remained largely constant across the years covered. Seven literacy-related items were added beginning in 2021.</p>
+  <p>A copy of the most recent survey is available here: <a href="EmployerSatisfactionSurveyItems.pdf">Employer Satisfaction Survey Items (PDF)</a></p>
+
+  <h2>Small Counts</h2>
+  <p>Results are not displayed for any group with fewer than ten survey responses. The dashboard also reports the survey response rate, disaggregated by the filters the user selects.</p>
+
+  <h2>Questions?</h2>
+  <p>Contact <a href="mailto:andy.baxter@dpi.nc.gov">andy.baxter@dpi.nc.gov</a></p>
+
+  <div class="changelog">
+    <h2>Version History</h2>
+
+    <h3>2026.1 <span class="badge updated">UPDATED</span></h3>
+    <p class="date">March 4, 2026</p>
+    <ul>
+      <li>Updated with results from the 2023&ndash;24 and 2024&ndash;25 surveys</li>
+    </ul>
+
+    <h3>2024.1</h3>
+    <p class="date">April 3, 2024</p>
+    <ul>
+      <li>Updated with results from the 2023 survey</li>
+    </ul>
+
+    <h3>2023.3</h3>
+    <p class="date">April 21, 2023</p>
+    <ul>
+      <li>Added survey count column and small-count suppression to DIY Table</li>
+    </ul>
+
+    <h3>2023.2</h3>
+    <p class="date">April 10, 2023</p>
+    <ul>
+      <li>Added notes and glossary</li>
+    </ul>
+
+    <h3>2023.1</h3>
+    <p class="date">February 1, 2023</p>
+    <ul>
+      <li>Originally published</li>
+    </ul>
+  </div>
+
+  <p class="last-updated">Last updated: March 4, 2026</p>
+
+</body>
+</html>

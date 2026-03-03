@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPP Dashboard Home &mdash; NCDPI EPP Dashboard</title>
+
+  <!--
+    EPP Dashboard Home — Dashboard Notes
+    ============================
+    Dashboard notes for the NCDPI EPP Dashboard Home (landing page).
+    Embedded in Tableau via a GitHub Pages URL as a web object.
+
+    Stylesheet: Inlined from dashboard-notes.css (2026-03-01)
+    Last updated: 2026-03-02
+  -->
+
+  <style>
+    /*
+      Inlined from dashboard-notes.css — 2026-03-01
+      Canonical source: _Reference/_StyleGuide/dashboard-notes.css
+    */
+
+    /* --- Reset & Base ---------------------------------------------------- */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 14px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #FFFFFF;
+      padding: 1.5rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* --- Typography ------------------------------------------------------ */
+
+    h1, h2, h3, h4 {
+      color: #003A70;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid #003A70;
+      margin-top: 0;
+    }
+
+    h1 .subtitle {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: normal;
+      color: #666666;
+      margin-top: 0.2rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding-bottom: 0.25rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #922880;
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+
+    /* --- Links ----------------------------------------------------------- */
+
+    a {
+      color: #003A70;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #922880;
+    }
+
+    /* --- Lists ----------------------------------------------------------- */
+
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    li > ul, li > ol {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* --- Tables ---------------------------------------------------------- */
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    thead th {
+      background-color: #003A70;
+      color: #FFFFFF;
+      font-weight: bold;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+    }
+
+    tbody td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #E6E6E6;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #F7F6F3;
+    }
+
+    tbody tr:hover {
+      background-color: #E8F4F8;
+    }
+
+    tbody td:first-child {
+      font-weight: bold;
+      color: #003A70;
+      white-space: nowrap;
+    }
+
+    /* --- Callout Boxes --------------------------------------------------- */
+
+    .callout {
+      background-color: #E8F4F8;
+      border-left: 4px solid #29B5D9;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .callout.warning {
+      background-color: #FDF0E8;
+      border-left-color: #B33A12;
+    }
+
+    .callout.tip {
+      background-color: #EAF5F0;
+      border-left-color: #077890;
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* --- Definition Lists ------------------------------------------------ */
+
+    dl {
+      margin: 1rem 0;
+    }
+
+    dt {
+      font-weight: bold;
+      color: #003A70;
+      font-size: 1.05rem;
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    dt:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    dd {
+      margin-left: 0;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    dd ul {
+      margin-top: 0.35rem;
+    }
+
+    /* --- Changelog ------------------------------------------------------- */
+
+    .changelog {
+      background-color: #F7F6F3;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .changelog h2 {
+      font-size: 1.1rem;
+      color: #922880;
+      border-bottom: none;
+      margin-top: 0;
+    }
+
+    .changelog h3 {
+      font-size: 0.95rem;
+      color: #003A70;
+      border-bottom: none;
+      margin-top: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .changelog .date {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 0.25rem;
+    }
+
+    .changelog ul {
+      margin-left: 1.25rem;
+      margin-top: 0.25rem;
+    }
+
+    /* --- Badge ----------------------------------------------------------- */
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      background-color: #003A70;
+      color: #FFFFFF;
+      vertical-align: middle;
+      margin-left: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge.updated {
+      background-color: #922880;
+    }
+
+    /* --- Horizontal Rule ------------------------------------------------- */
+
+    hr {
+      border: none;
+      border-top: 1px solid #CCCCCC;
+      margin: 1.5rem 0;
+    }
+
+    /* --- Footer ---------------------------------------------------------- */
+
+    .last-updated {
+      font-size: 0.8rem;
+      color: #999999;
+      text-align: right;
+      margin-top: 2rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    /* --- Print ----------------------------------------------------------- */
+
+    @media print {
+      body { padding: 0; font-size: 11pt; }
+      h1 { border-bottom-color: #000000; }
+      thead th {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000;
+      }
+      .callout {
+        border-left-width: 3px;
+        background-color: #FFFFFF !important;
+      }
+      dt { color: #000000; }
+      a { color: #000000; }
+    }
+
+    /* --- Responsive ------------------------------------------------------ */
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; font-size: 13px; }
+      table { font-size: 0.85rem; }
+      tbody td:first-child { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    EPP Dashboard Home
+    <span class="subtitle">Landing page and state-level overview of North Carolina educator preparation program measures</span>
+  </h1>
+
+  <h2>Overview</h2>
+  <p>This is the landing page for NCDPI&rsquo;s Educator Preparation Program dashboards. It serves two purposes:</p>
+  <ul>
+    <li><strong>Navigation</strong> &mdash; Click any chart or the tabs in the top banner to go to that measure&rsquo;s detailed dashboard, where you can disaggregate results by EPP, candidate demographics, and other subgroups.</li>
+    <li><strong>State-level trends</strong> &mdash; Each chart shows approximately five years of statewide results for one of 12 measures. Charts are shaded <strong style="color: #003A70;">blue</strong> for increases over time, <strong style="color: #B33A12;">orange</strong> for decreases, and <strong style="color: #999999;">gray</strong> for stable trends.</li>
+  </ul>
+
+  <h2>The 12 Measures</h2>
+  <p>The dashboard tracks 12 measures across three categories:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Measures</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Pipeline</td>
+        <td>Total Enrollment, New Enrollment, Completions, Initial Licenses</td>
+      </tr>
+      <tr>
+        <td>Outcomes</td>
+        <td>Employment, Early-Career Retention, EVAAS (Student Growth), NCEES (Teaching Performance)</td>
+      </tr>
+      <tr>
+        <td>Quality</td>
+        <td>Candidate Satisfaction, Employer Satisfaction, License Exams, License Conversions</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Each measure links to a detailed dashboard with its own notes explaining the data and business rules. Hover over any card to see a brief description.</p>
+
+  <h2>Who Is Included</h2>
+  <p>Unless otherwise noted, the data reflects candidates seeking initial teaching licenses. See the <em>Glossary</em> for how this population is defined.</p>
+
+  <h2>Reading the Charts</h2>
+  <p>For rate-based measures (e.g., employment, pass rates), very high values (&gt;95%) and very low values (&lt;5%) are masked to protect small groups. When a group has fewer than ten candidates, the result is suppressed entirely and displayed as &ldquo;N&lt;10.&rdquo;</p>
+
+  <div class="callout tip">
+    <p><strong>Tip:</strong> Some measures use a time shift to align with program outcomes. For example, the Employment measure shows data one year after the completion year, and Retention shows data two years after, because candidates need time to enter and remain in the workforce.</p>
+  </div>
+
+  <h2>Data Source</h2>
+  <p>The primary source is the roster of candidates provided annually to NCDPI by the EPPs. NCDPI links this data to its own payroll, licensure, evaluation, and student growth databases. Survey data and program information also come from the EPPs.</p>
+
+  <h2>Questions?</h2>
+  <p>Contact <a href="mailto:andy.baxter@dpi.nc.gov">andy.baxter@dpi.nc.gov</a></p>
+
+  <div class="changelog">
+    <h2>Version History</h2>
+
+    <h3>2026.1 <span class="badge updated">UPDATED</span></h3>
+    <p class="date">March 4, 2026</p>
+    <ul>
+      <li>Updated all measures with the most recent available data</li>
+      <li>Streamlined from 15 to 12 measures; removed GPA and Number of EPPs; replaced Completion Rates with Initial Licenses; added License Conversions</li>
+      <li>Charts now show a rolling five-year window with trend shading (blue/orange/gray)</li>
+      <li>Added high/low masking (&gt;95% and &lt;5%) and cell suppression (N&lt;10) for small groups</li>
+    </ul>
+
+    <h3>2025.1</h3>
+    <p class="date">March 4, 2025</p>
+    <ul>
+      <li>Updated all measures with 2023&ndash;24 data</li>
+    </ul>
+
+    <h3>2024.2</h3>
+    <p class="date">May 2, 2024</p>
+    <ul>
+      <li>Revised EVAAS chart to reflect stricter matching between license area of preparation and pertinent EVAAS subject/grade</li>
+      <li>Revised Candidate Satisfaction and Employer Satisfaction charts to exclude responses from candidates teaching outside their area of preparation, and literacy items for candidates not prepared for literacy instruction</li>
+    </ul>
+
+    <h3>2024.1</h3>
+    <p class="date">April 3, 2024</p>
+    <ul>
+      <li>Updated with 2022&ndash;23 data</li>
+      <li>Several new dashboards added</li>
+    </ul>
+
+    <h3>2023.1</h3>
+    <p class="date">March 1, 2023</p>
+    <ul>
+      <li>Originally published</li>
+    </ul>
+  </div>
+
+  <p class="last-updated">Last updated: March 4, 2026</p>
+
+</body>
+</html>

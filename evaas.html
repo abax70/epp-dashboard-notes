@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Growth (EVAAS) &mdash; NCDPI EPP Dashboard</title>
+
+  <!--
+    Student Growth (EVAAS) — Dashboard Notes
+    ============================
+    Dashboard notes for the NCDPI EPP Student Growth dashboard.
+    Embedded in Tableau via a GitHub Pages URL as a web object.
+
+    Stylesheet: Inlined from dashboard-notes.css (2026-03-01)
+    Last updated: 2026-03-02
+  -->
+
+  <style>
+    /*
+      Inlined from dashboard-notes.css — 2026-03-01
+      Canonical source: _Reference/_StyleGuide/dashboard-notes.css
+    */
+
+    /* --- Reset & Base ---------------------------------------------------- */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 14px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #FFFFFF;
+      padding: 1.5rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* --- Typography ------------------------------------------------------ */
+
+    h1, h2, h3, h4 {
+      color: #003A70;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid #003A70;
+      margin-top: 0;
+    }
+
+    h1 .subtitle {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: normal;
+      color: #666666;
+      margin-top: 0.2rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding-bottom: 0.25rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #922880;
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+
+    /* --- Links ----------------------------------------------------------- */
+
+    a {
+      color: #003A70;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #922880;
+    }
+
+    /* --- Lists ----------------------------------------------------------- */
+
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    li > ul, li > ol {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* --- Tables ---------------------------------------------------------- */
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    thead th {
+      background-color: #003A70;
+      color: #FFFFFF;
+      font-weight: bold;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+    }
+
+    tbody td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #E6E6E6;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #F7F6F3;
+    }
+
+    tbody tr:hover {
+      background-color: #E8F4F8;
+    }
+
+    tbody td:first-child {
+      font-weight: bold;
+      color: #003A70;
+      white-space: nowrap;
+    }
+
+    /* --- Callout Boxes --------------------------------------------------- */
+
+    .callout {
+      background-color: #E8F4F8;
+      border-left: 4px solid #29B5D9;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .callout.warning {
+      background-color: #FDF0E8;
+      border-left-color: #B33A12;
+    }
+
+    .callout.tip {
+      background-color: #EAF5F0;
+      border-left-color: #077890;
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* --- Definition Lists ------------------------------------------------ */
+
+    dl {
+      margin: 1rem 0;
+    }
+
+    dt {
+      font-weight: bold;
+      color: #003A70;
+      font-size: 1.05rem;
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    dt:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    dd {
+      margin-left: 0;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    dd ul {
+      margin-top: 0.35rem;
+    }
+
+    /* --- Changelog ------------------------------------------------------- */
+
+    .changelog {
+      background-color: #F7F6F3;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .changelog h2 {
+      font-size: 1.1rem;
+      color: #922880;
+      border-bottom: none;
+      margin-top: 0;
+    }
+
+    .changelog h3 {
+      font-size: 0.95rem;
+      color: #003A70;
+      border-bottom: none;
+      margin-top: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .changelog .date {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 0.25rem;
+    }
+
+    .changelog ul {
+      margin-left: 1.25rem;
+      margin-top: 0.25rem;
+    }
+
+    /* --- Badge ----------------------------------------------------------- */
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      background-color: #003A70;
+      color: #FFFFFF;
+      vertical-align: middle;
+      margin-left: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge.updated {
+      background-color: #922880;
+    }
+
+    /* --- Horizontal Rule ------------------------------------------------- */
+
+    hr {
+      border: none;
+      border-top: 1px solid #CCCCCC;
+      margin: 1.5rem 0;
+    }
+
+    /* --- Footer ---------------------------------------------------------- */
+
+    .last-updated {
+      font-size: 0.8rem;
+      color: #999999;
+      text-align: right;
+      margin-top: 2rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    /* --- Print ----------------------------------------------------------- */
+
+    @media print {
+      body { padding: 0; font-size: 11pt; }
+      h1 { border-bottom-color: #000000; }
+      thead th {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000;
+      }
+      .callout {
+        border-left-width: 3px;
+        background-color: #FFFFFF !important;
+      }
+      dt { color: #000000; }
+      a { color: #000000; }
+    }
+
+    /* --- Responsive ------------------------------------------------------ */
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; font-size: 13px; }
+      table { font-size: 0.85rem; }
+      tbody td:first-child { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    Student Growth (EVAAS)
+    <span class="subtitle">Impact of EPP completers on student growth as measured by EVAAS</span>
+  </h1>
+
+  <h2>Overview</h2>
+  <p>This dashboard shows the impact of EPP completers on student growth as measured by the <a href="https://www.sas.com/en_us/industry/k-12-education/evaas.html">Education Value-Added Assessment System (EVAAS)</a>. Based on the test performance of a candidate&rsquo;s students, each score is categorized as:</p>
+  <ul>
+    <li><strong>Did not meet</strong> expected growth</li>
+    <li><strong>Met</strong> expected growth</li>
+    <li><strong>Exceeded</strong> expected growth</li>
+  </ul>
+  <p>This measure applies only to candidates teaching in a grade and subject with NC standardized testing.</p>
+
+  <h2>Who Is Included</h2>
+  <p>Candidates with initial teaching licenses (see <em>Glossary</em>) who completed their EPP and taught a tested grade/subject in a North Carolina traditional or charter school within three years of program completion.</p>
+
+  <h2>How the Three-Year Window Works</h2>
+  <p>After completing their EPP, a candidate has up to three years to receive EVAAS scores. The dashboard uses only the <strong>first year</strong> in which the candidate received scores. If a candidate completed in 2020 and first received EVAAS scores in 2022, only the 2022 scores appear.</p>
+  <p>EVAAS scores received by alternate-route candidates <em>prior to</em> their program completion are not included.</p>
+
+  <div class="callout">
+    <p><strong>Data for recent completers may update:</strong> Because the dashboard uses a three-year window, data for recent completion cohorts may change as more candidates from those cohorts receive their first EVAAS scores in subsequent years.</p>
+  </div>
+
+  <div class="callout warning">
+    <p><strong>COVID-19:</strong> No EVAAS data is available for 2020 or 2021. Candidates who would have received their first scores in those years appear in the dashboard under a later year instead, if applicable.</p>
+  </div>
+
+  <h2>Multiple Scores per Candidate</h2>
+  <p>Teachers can receive multiple EVAAS scores in a given year&mdash;one for each subject and grade they teach (e.g., Math Grade 4 and Math Grade 5). Only scores in subjects and grades pertinent to the candidate&rsquo;s EPP preparation are included. Scores in subjects or grades the candidate was not trained for are excluded.</p>
+
+  <div class="callout tip">
+    <p><strong>ESL and EC teachers:</strong> These teachers receive an EVAAS score only if they are designated the teacher of record for their students during the EVAAS roster validation process. When they do, the dashboard reports their composite score across grades and subjects.</p>
+  </div>
+
+  <h2>Data Source</h2>
+  <p>Candidate rosters are provided annually by EPPs to NCDPI. EVAAS scores are computed by SAS.</p>
+
+  <h2>Small Counts</h2>
+  <p>Results are not displayed for any group with fewer than ten candidates.</p>
+
+  <h2>Questions?</h2>
+  <p>Contact <a href="mailto:andy.baxter@dpi.nc.gov">andy.baxter@dpi.nc.gov</a></p>
+
+  <div class="changelog">
+    <h2>Version History</h2>
+
+    <h3>2026.1 <span class="badge updated">UPDATED</span></h3>
+    <p class="date">March 4, 2026</p>
+    <ul>
+      <li>Updated with EVAAS data from 2024&ndash;25</li>
+    </ul>
+
+    <h3>2025.1</h3>
+    <p class="date">March 4, 2025</p>
+    <ul>
+      <li>Updated with EVAAS data from 2023&ndash;24</li>
+    </ul>
+
+    <h3>2024.2</h3>
+    <p class="date">April 24, 2024</p>
+    <ul>
+      <li>Excluded EVAAS scores in subjects and grades for which candidates did not receive training in their EPP</li>
+    </ul>
+
+    <h3>2024.1</h3>
+    <p class="date">April 3, 2024</p>
+    <ul>
+      <li>Updated with EVAAS data from 2022&ndash;23</li>
+    </ul>
+
+    <h3>2023.3</h3>
+    <p class="date">April 26, 2023</p>
+    <ul>
+      <li>Corrected a data issue where only one EVAAS score per candidate was included instead of all scores across subjects and grades; results may differ substantially from earlier versions</li>
+    </ul>
+
+    <h3>2023.2</h3>
+    <p class="date">April 6, 2023</p>
+    <ul>
+      <li>Fixed the primary chart to show only composite EVAAS ratings (was incorrectly displaying all grades and subjects)</li>
+      <li>Fixed 2022 subject- and grade-specific ratings not displaying</li>
+    </ul>
+
+    <h3>2023.1</h3>
+    <p class="date">February 1, 2023</p>
+    <ul>
+      <li>Originally published</li>
+    </ul>
+  </div>
+
+  <p class="last-updated">Last updated: March 4, 2026</p>
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>License Conversions &mdash; NCDPI EPP Dashboard</title>
+
+  <!--
+    License Conversions — Dashboard Notes
+    ============================
+    Dashboard notes for the NCDPI EPP License Conversions dashboard.
+    Embedded in Tableau via a GitHub Pages URL as a web object.
+
+    Stylesheet: Inlined from dashboard-notes.css (2026-03-01)
+    Last updated: 2026-03-02
+  -->
+
+  <style>
+    /*
+      Inlined from dashboard-notes.css — 2026-03-01
+      Canonical source: _Reference/_StyleGuide/dashboard-notes.css
+    */
+
+    /* --- Reset & Base ---------------------------------------------------- */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 14px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #FFFFFF;
+      padding: 1.5rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* --- Typography ------------------------------------------------------ */
+
+    h1, h2, h3, h4 {
+      color: #003A70;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid #003A70;
+      margin-top: 0;
+    }
+
+    h1 .subtitle {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: normal;
+      color: #666666;
+      margin-top: 0.2rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding-bottom: 0.25rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #922880;
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+
+    /* --- Links ----------------------------------------------------------- */
+
+    a {
+      color: #003A70;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #922880;
+    }
+
+    /* --- Lists ----------------------------------------------------------- */
+
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    li > ul, li > ol {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* --- Tables ---------------------------------------------------------- */
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    thead th {
+      background-color: #003A70;
+      color: #FFFFFF;
+      font-weight: bold;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+    }
+
+    tbody td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #E6E6E6;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #F7F6F3;
+    }
+
+    tbody tr:hover {
+      background-color: #E8F4F8;
+    }
+
+    tbody td:first-child {
+      font-weight: bold;
+      color: #003A70;
+      white-space: nowrap;
+    }
+
+    /* --- Callout Boxes --------------------------------------------------- */
+
+    .callout {
+      background-color: #E8F4F8;
+      border-left: 4px solid #29B5D9;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .callout.warning {
+      background-color: #FDF0E8;
+      border-left-color: #B33A12;
+    }
+
+    .callout.tip {
+      background-color: #EAF5F0;
+      border-left-color: #077890;
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* --- Definition Lists ------------------------------------------------ */
+
+    dl {
+      margin: 1rem 0;
+    }
+
+    dt {
+      font-weight: bold;
+      color: #003A70;
+      font-size: 1.05rem;
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    dt:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    dd {
+      margin-left: 0;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    dd ul {
+      margin-top: 0.35rem;
+    }
+
+    /* --- Changelog ------------------------------------------------------- */
+
+    .changelog {
+      background-color: #F7F6F3;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .changelog h2 {
+      font-size: 1.1rem;
+      color: #922880;
+      border-bottom: none;
+      margin-top: 0;
+    }
+
+    .changelog h3 {
+      font-size: 0.95rem;
+      color: #003A70;
+      border-bottom: none;
+      margin-top: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .changelog .date {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 0.25rem;
+    }
+
+    .changelog ul {
+      margin-left: 1.25rem;
+      margin-top: 0.25rem;
+    }
+
+    /* --- Badge ----------------------------------------------------------- */
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      background-color: #003A70;
+      color: #FFFFFF;
+      vertical-align: middle;
+      margin-left: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge.updated {
+      background-color: #922880;
+    }
+
+    /* --- Horizontal Rule ------------------------------------------------- */
+
+    hr {
+      border: none;
+      border-top: 1px solid #CCCCCC;
+      margin: 1.5rem 0;
+    }
+
+    /* --- Footer ---------------------------------------------------------- */
+
+    .last-updated {
+      font-size: 0.8rem;
+      color: #999999;
+      text-align: right;
+      margin-top: 2rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    /* --- Print ----------------------------------------------------------- */
+
+    @media print {
+      body { padding: 0; font-size: 11pt; }
+      h1 { border-bottom-color: #000000; }
+      thead th {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000;
+      }
+      .callout {
+        border-left-width: 3px;
+        background-color: #FFFFFF !important;
+      }
+      dt { color: #000000; }
+      a { color: #000000; }
+    }
+
+    /* --- Responsive ------------------------------------------------------ */
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; font-size: 13px; }
+      table { font-size: 0.85rem; }
+      tbody td:first-child { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    License Conversions
+    <span class="subtitle">Rates at which EPP completers convert initial teaching licenses to continuing professional licenses</span>
+  </h1>
+
+  <h2>Overview</h2>
+  <p>This dashboard shows the proportion of candidates who convert their initial teaching license to a Continuing Professional License (CPL). Depending on their pathway, candidates may progress through Residency and Initial Professional License (IPL) stages before reaching CPL.</p>
+
+  <h2>Who Is Included</h2>
+  <p>Candidates pursuing initial teaching licenses (see <em>Glossary</em>) who completed their EPP and received their first teaching license between 2018 and 2022. In their annual roster submissions to NCDPI, EPPs list up to three license areas each candidate is pursuing; these are used to determine whether a candidate received an initial teaching license.</p>
+
+  <h2>How the Conversion Window Works</h2>
+  <p>Once candidates receive an initial teaching license, they must convert to a CPL by the end of their third year of licensure. The conversion clock starts at licensure&mdash;not program completion. For alternate-route candidates, this means the clock may start before they finish their program.</p>
+
+  <div class="callout">
+    <p><strong>Why doesn&rsquo;t the data go up to the present?</strong> The dashboard stops short of the most recent years to allow the three-year conversion window to close. Only cohorts whose full window has elapsed are included, so the conversion rates shown are final.</p>
+  </div>
+
+  <h2>Data Source</h2>
+  <p>Candidate rosters are submitted annually by EPPs to NCDPI. Licensure data comes from NCDPI. See NC State Board of Education Policy <a href="https://ncdpi.tiny.us/LICN-001">LICN-001</a> for details on licensure requirements.</p>
+
+  <h2>Small Counts</h2>
+  <p>Results are not displayed for any group with fewer than ten candidates.</p>
+
+  <h2>Questions?</h2>
+  <p>Contact <a href="mailto:andy.baxter@dpi.nc.gov">andy.baxter@dpi.nc.gov</a></p>
+
+  <div class="changelog">
+    <h2>Version History</h2>
+
+    <h3>2026.1 <span class="badge updated">UPDATED</span></h3>
+    <p class="date">March 4, 2026</p>
+    <ul>
+      <li>Updated with data through 2024&ndash;25</li>
+    </ul>
+
+    <h3>2025.1</h3>
+    <p class="date">March 4, 2025</p>
+    <ul>
+      <li>Updated with data through 2023&ndash;24</li>
+    </ul>
+
+    <h3>2023.2</h3>
+    <p class="date">April 11, 2023</p>
+    <ul>
+      <li>Split the former Overview tab into separate views for initial licenses and license conversions</li>
+      <li>Added notes and glossary</li>
+    </ul>
+
+    <h3>2023.1</h3>
+    <p class="date">February 1, 2023</p>
+    <ul>
+      <li>Originally published</li>
+    </ul>
+  </div>
+
+  <p class="last-updated">Last updated: March 4, 2026</p>
+
+</body>
+</html>

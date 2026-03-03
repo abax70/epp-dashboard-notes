@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NCDPI EPP Dashboard Glossary</title>
+
+  <!--
+    NCDPI EPP Dashboard Glossary
+    ============================
+    This file is embedded in Tableau dashboards as a web object via
+    a Google Drive shareable link. Edit this file directly to update
+    the glossary across all dashboards.
+
+    Stylesheet: dashboard-notes.css (in this folder)
+    Last updated: 2026-02-17
+  -->
+
+  <!-- Shared NCDPI dashboard notes stylesheet -->
+  <style>
+    /*
+      NOTE: CSS is inlined here rather than linked because Google Drive's
+      HTML preview doesn't reliably load external stylesheets from
+      separate files. If hosting moves to a web server in the future,
+      replace this block with:
+        <link rel="stylesheet" href="dashboard-notes.css">
+    */
+
+    /* --- Reset & Base ---------------------------------------------------- */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 14px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #FFFFFF;
+      padding: 1.5rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* --- Typography ------------------------------------------------------ */
+
+    h1, h2, h3, h4 {
+      color: #003A70;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid #003A70;
+      margin-top: 0;
+    }
+
+    h1 .subtitle {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: normal;
+      color: #666666;
+      margin-top: 0.2rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding-bottom: 0.25rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #922880;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+
+    /* --- Links ----------------------------------------------------------- */
+
+    a {
+      color: #003A70;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #922880;
+    }
+
+    /* --- Lists ----------------------------------------------------------- */
+
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* --- Definition List (glossary terms) -------------------------------- */
+
+    dl {
+      margin: 1rem 0;
+    }
+
+    dt {
+      font-weight: bold;
+      color: #003A70;
+      font-size: 1.05rem;
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    dt:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    dd {
+      margin-left: 0;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    dd ul {
+      margin-top: 0.35rem;
+    }
+
+    /* --- Callout Box ----------------------------------------------------- */
+
+    .callout {
+      background-color: #E8F4F8;
+      border-left: 4px solid #29B5D9;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* --- Changelog ------------------------------------------------------- */
+
+    .changelog {
+      background-color: #F7F6F3;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .changelog h2 {
+      font-size: 1.1rem;
+      color: #922880;
+      border-bottom: none;
+      margin-top: 0;
+    }
+
+    .changelog h3 {
+      font-size: 0.95rem;
+      color: #003A70;
+      margin-top: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .changelog .date {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 0.25rem;
+    }
+
+    .changelog ul {
+      margin-left: 1.25rem;
+      margin-top: 0.25rem;
+    }
+
+    /* --- Badge ----------------------------------------------------------- */
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      background-color: #003A70;
+      color: #FFFFFF;
+      vertical-align: middle;
+      margin-left: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge.updated {
+      background-color: #922880;
+    }
+
+    /* --- Footer ---------------------------------------------------------- */
+
+    .last-updated {
+      font-size: 0.8rem;
+      color: #999999;
+      text-align: right;
+      margin-top: 2rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    /* --- Print ----------------------------------------------------------- */
+
+    @media print {
+      body { padding: 0; font-size: 11pt; }
+      h1 { border-bottom-color: #000000; }
+      dt { color: #000000; }
+      a { color: #000000; }
+    }
+
+    /* --- Responsive ------------------------------------------------------ */
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    Glossary
+    <span class="subtitle">Key terms in NCDPI's Educator Preparation Program Dashboards</span>
+  </h1>
+
+  <dl>
+
+    <dt>Candidate</dt>
+    <dd>Someone enrolled in an educator preparation program (EPP) in the past or currently.</dd>
+
+    <dt>Enrollment Year</dt>
+    <dd>The first year the candidate takes classes in the EPP following admission to the program. Enrollment years follow an August 1 &ndash; July 31 cycle. For example, someone starting a program on August 15, 2024, would have an enrollment year of 2025.</dd>
+
+    <dt>Candidate Completion Year</dt>
+    <dd>Completion means finishing the EPP having met all its requirements. Completion years follow a <strong>September 1 &ndash; August 31</strong> cycle, which differs from the August 1 &ndash; July 31 enrollment year. This ensures that candidates who complete in August are counted in the year before they begin teaching, since most August completers enter the classroom that same fall. For example, someone completing on August 15, 2025, has a 2025 completion year; someone completing on September 5, 2025, has a 2026 completion year.</dd>
+
+    <dt>Degree</dt>
+    <dd>
+      Across the state, EPPs offer eight types of degrees:
+      <ul>
+        <li>Undergraduate (U)</li>
+        <li>Undergraduate license only &mdash; no degree awarded (ULO)</li>
+        <li>Initial teaching license issued at the graduate level (GFA)</li>
+        <li>Residency (R)</li>
+        <li>Graduate level (G)</li>
+        <li>Graduate degree in a new license area (GNA)</li>
+        <li>Upgrade to graduate degree in area already licensed (GSA)</li>
+        <li>Graduate license only (GLO)</li>
+      </ul>
+      Not every EPP offers all the degrees.
+    </dd>
+
+    <dt>Degree Type</dt>
+    <dd>
+      The dashboard groups the degrees as follows:
+      <ul>
+        <li><strong>Graduate</strong> degree type includes the GFA, G, GNA, and GSA degrees</li>
+        <li><strong>Undergraduate</strong> degree type includes the U degree</li>
+        <li><strong>License-Only</strong> degree type includes ULO, GLO, and R</li>
+      </ul>
+    </dd>
+
+    <dt>EPP Type</dt>
+    <dd>The dashboard places EPPs into four groups: Institutions of Higher Education &ndash; Public, Institutions of Higher Education &ndash; Independent, Community Colleges, and Non-IHE. Non-IHE refers to EPPs that are not based at institutions of higher education in NC.</dd>
+
+    <dt>Initial Teaching License</dt>
+    <dd>Except where noted, all of the EPP dashboards focus on candidates pursuing initial teaching licenses. This excludes candidates pursuing administrative degrees, license endorsements, or additional teaching licenses.</dd>
+
+    <dt>License Group</dt>
+    <dd>For visualizations, the dashboard categorizes license areas into six groups: Elementary, Middle Grades, Secondary, Special Subjects, Exceptional Children, and Career Technical Education. In the DIY Tables, you can see data at the license area level.</dd>
+
+    <dt>Small Count Suppression</dt>
+    <dd>When a filtered group contains fewer than 10 candidates, the dashboard may hide or mask the value to protect individual privacy and avoid misleading rates. A single candidate joining or leaving a small group can swing a percentage by 10 points or more, so these values are suppressed rather than displayed.</dd>
+
+    <dt>Pathway</dt>
+    <dd>
+      <p>Pathway refers to the route a candidate takes to licensure. The dashboard categorizes candidates into two pathways:</p>
+      <ul>
+        <li><strong>Traditional</strong> &mdash; includes all degrees that lead to an academic degree (Undergraduate, Graduate in First License Area / GFA).</li>
+        <li><strong>Alternate</strong> &mdash; includes all degree designations that do not result in an academic degree upon completion (ULO, GLO, R).</li>
+      </ul>
+      <div class="callout">
+        <p><strong>Note:</strong> Anyone who holds a residency license while completing their program is counted as alternate route, regardless of degree. For example, someone in a GFA program with a residency license is alternate route for the purposes of the dashboard.</p>
+      </div>
+    </dd>
+
+  </dl>
+
+  <h2>Questions?</h2>
+  <p>Contact <a href="mailto:andy.baxter@dpi.nc.gov">andy.baxter@dpi.nc.gov</a></p>
+
+  <div class="changelog">
+    <h2>Version History</h2>
+
+    <h3>2026.1 <span class="badge updated">UPDATED</span></h3>
+    <p class="date">March 4, 2026</p>
+    <ul>
+      <li>Updated Candidate Completion Year to reflect the September 1 &ndash; August 31 cycle</li>
+      <li>Added Small Count Suppression definition</li>
+    </ul>
+
+    <h3>2025.1</h3>
+    <p class="date">March 4, 2025</p>
+    <ul>
+      <li>Added community colleges to EPP Type</li>
+    </ul>
+
+    <h3>2024.1</h3>
+    <p class="date">April 3, 2024</p>
+    <ul>
+      <li>Updated definition of New Enroll Year and Pathway</li>
+    </ul>
+  </div>
+
+  <p class="last-updated">Last updated: March 4, 2026</p>
+
+</body>
+</html>
