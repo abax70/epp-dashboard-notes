@@ -12,7 +12,7 @@
     Embedded in Tableau via a GitHub Pages URL as a web object.
 
     Stylesheet: Inlined from dashboard-notes.css (2026-03-01)
-    Last updated: 2026-03-02
+    Last updated: 2026-03-12
   -->
 
   <style>
@@ -328,6 +328,31 @@
   <h2>Who Is Included</h2>
   <p>Candidates pursuing initial teaching licenses. Candidates seeking administrative licenses or additional teaching licenses are excluded. See the <em>Glossary</em> for more detail.</p>
 
+  <h2>Degree Types</h2>
+  <p>Enrollment counts can be disaggregated by degree type. EPPs offer programs at three levels:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Degree Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Undergraduate</td>
+        <td>Candidates enrolled in a bachelor&rsquo;s degree program leading to initial teacher licensure.</td>
+      </tr>
+      <tr>
+        <td>Graduate</td>
+        <td>Candidates enrolled in a master&rsquo;s or other graduate-level program leading to initial teacher licensure. Includes Master of Arts in Teaching (MAT) and similar programs.</td>
+      </tr>
+      <tr>
+        <td>License Only</td>
+        <td>Candidates who already hold a degree and are enrolled in a licensure-only pathway. Includes residency license holders and lateral entry candidates.</td>
+      </tr>
+    </tbody>
+  </table>
+
   <h2>Data Source</h2>
   <p>EPPs submit annual rosters of enrolled candidates to NCDPI. These rosters are the underlying dataset for all of the EPP dashboards. The dashboard covers the most recent five years.</p>
 
@@ -344,7 +369,14 @@
   <div class="changelog">
     <h2>Version History</h2>
 
-    <h3>2026.1 <span class="badge updated">UPDATED</span></h3>
+    <h3>2026.2 <span class="badge updated">UPDATED</span></h3>
+    <p class="date">March 12, 2026</p>
+    <ul>
+      <li>Added degree type definitions (Undergraduate, Graduate, License Only)</li>
+      <li>Corrected enrollment panel data (year-anchor and edge-case fixes)</li>
+    </ul>
+
+    <h3>2026.1</h3>
     <p class="date">March 4, 2026</p>
     <ul>
       <li>Updated with most recent enrollment data</li>
@@ -382,7 +414,7 @@
     </ul>
   </div>
 
-  <p class="last-updated">Last updated: March 4, 2026</p>
+  <p class="last-updated">Last updated: March 12, 2026</p>
 
 </body>
 </html>
