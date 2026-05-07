@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPP Performance Reporting Process Guide 2025&ndash;2026 &mdash; NCDPI</title>
+
+  <!--
+    EPP Performance Reporting Process Guide (2025-2026)
+    ====================================================
+    Distributed annually by the NCDPI Educator Preparation Team to all NC EPPs.
+    Explains how each EPP submits its performance reporting data each year.
+
+    Source: _Reference/EPP_Performance_Reporting_Process_Guide_2026_v3.docx
+    Stylesheet: Inlined from _Reference/_StyleGuide/dashboard-notes.css
+                (with .new-this-year, .skip-link, and .anchor-list additions)
+    Author: NCDPI Educator Preparation Team
+    Last updated: 2026-05-07
+
+    "[NEW 2025-26]" markers + dark red text indicate content that is new or
+    revised for the 2025-2026 reporting cycle. The visible "NEW 2025-26"
+    badge ensures the new-this-year cue is conveyed without relying on color
+    alone (WCAG 2.1 SC 1.4.1 Use of Color).
+  -->
+
+  <style>
+    /* Inlined from dashboard-notes.css — 2026-03-03 (canonical source:
+       _Reference/_StyleGuide/dashboard-notes.css). Plus this guide's
+       additions: .new-this-year, .skip-link, .toc, .anchor-list. */
+
+    /* --- Reset & Base ---------------------------------------------------- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 14px; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #FFFFFF;
+      padding: 1.5rem 2rem;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    /* --- Visually-hidden utility (for screen-reader-only content) -------- */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* --- Skip link (WCAG SC 2.4.1 Bypass Blocks) ------------------------- */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: #003A70;
+      color: #FFFFFF;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .skip-link:focus {
+      left: 0.5rem;
+      top: 0.5rem;
+      outline: 2px solid #FFD100;
+    }
+
+    /* --- Typography ------------------------------------------------------ */
+    h1, h2, h3, h4 {
+      color: #003A70;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    h1 {
+      font-size: 2.25rem;
+      font-weight: bold;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid #003A70;
+      margin-top: 0;
+    }
+    h1 .subtitle {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: normal;
+      color: #666666;
+      margin-top: 0.2rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      font-weight: bold;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid #E6E6E6;
+      margin-top: 2rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    /* h4 sits one level below h3 — give it a clearly subordinate visual
+       treatment (smaller, darker gray) so it doesn't compete with h2. */
+    h4 {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #4A4A4A;
+      margin-top: 1.25rem;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Table-title override: keep semantic heading level (h3 vs h4) but
+       force a single color and consistent size across all five table
+       titles. */
+    h3.table-title, h4.table-title { color: #003A70; }
+    h4.table-title { font-size: 1rem; }
+    p { margin-bottom: 0.75rem; }
+
+    /* --- Links ----------------------------------------------------------- */
+    a { color: #003A70; text-decoration: underline; }
+    a:hover, a:focus { color: #001F3D; }
+    a:focus { outline: 2px solid #077890; outline-offset: 2px; }
+
+    /* --- Lists ----------------------------------------------------------- */
+    ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.35rem; }
+    li > ul, li > ol { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+
+    /* --- Tables ---------------------------------------------------------- */
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    caption {
+      caption-side: top;
+      text-align: left;
+      font-weight: bold;
+      color: #003A70;
+      padding-bottom: 0.4rem;
+      font-size: 1rem;
+    }
+    thead th {
+      background-color: #003A70;
+      color: #FFFFFF;
+      font-weight: bold;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      vertical-align: top;
+    }
+    tbody th, tbody td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #E6E6E6;
+      vertical-align: top;
+      text-align: left;
+    }
+    tbody th {
+      font-weight: bold;
+      color: #003A70;
+      background-color: transparent;
+    }
+    tbody tr:nth-child(even) { background-color: #F7F6F3; }
+    tbody tr:hover, tbody tr:focus-within { background-color: #E8F4F8; }
+
+    /* --- Callouts -------------------------------------------------------- */
+    .callout {
+      background-color: #E8F4F8;
+      border-left: 4px solid #29B5D9;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .callout.warning { background-color: #FDF0E8; border-left-color: #B33A12; }
+    .callout.tip { background-color: #EAF5F0; border-left-color: #077890; }
+    .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+    .callout-title {
+      font-weight: bold;
+      color: #003A70;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    /* Inline variant: same styling without forcing a line break, used
+       when the callout body is a single sentence (e.g., "Due: ..."). */
+    .callout p > .callout-title {
+      display: inline;
+      margin-right: 0.4rem;
+    }
+    .callout p > .callout-title::after { content: ":"; }
+
+    /* --- "New this year" emphasis (WCAG SC 1.4.1) ------------------------- */
+    /* Color preserves the boss's dark-red convention; the leading badge
+       conveys "new" without relying on color alone. */
+    .new-this-year { color: #A81E33; font-weight: 600; }
+    .new-this-year::before {
+      content: "NEW 2025-26";
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.1rem 0.4rem;
+      margin-right: 0.4rem;
+      background: #A81E33;
+      color: #FFFFFF;
+      border-radius: 3px;
+      vertical-align: middle;
+      letter-spacing: 0.04em;
+    }
+    /* Cell-level marker in tables. Row-header cells (th[scope="row"])
+       keep a compact NEW badge so the new-this-year cue is conveyed
+       without relying on color alone (WCAG SC 1.4.1). Inline-cell tds
+       drop the badge to avoid visual repetition across the row. */
+    td.new-this-year, th.new-this-year { color: #A81E33; font-weight: 600; }
+    td.new-this-year::before { content: none; }
+    /* Per-row NEW badges suppressed when ~30%+ of rows are flagged
+       (Tables 2 and 3) — the dark-red text on .new-this-year cells
+       is sufficient row-level signal without the wall-of-badges. */
+    th[scope="row"].new-this-year::before { content: none; }
+
+    /* Note shown directly under a section heading when the entire section
+       is new for the current reporting cycle. Subtle so the section body
+       reads as plain prose. */
+    .section-new-note {
+      font-style: italic;
+      color: #A81E33;
+      margin-top: -0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .legend-swatch {
+      display: inline-block;
+      background: #A81E33;
+      color: #FFFFFF;
+      font-weight: bold;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
+
+    /* Inline legend that sits between a table title and the table itself.
+       Used in Tables 2 and 3 where many rows are flagged new and the per-
+       row badges were dropped to avoid visual clutter. */
+    .table-legend {
+      font-size: 0.9rem;
+      color: #4A4A4A;
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* --- Date highlight (replaces Word's yellow highlight) --------------- */
+    .due-date {
+      background-color: #FFF4C2;
+      padding: 0.05rem 0.25rem;
+      border-radius: 2px;
+      font-weight: bold;
+    }
+
+    /* --- Definition Lists ------------------------------------------------ */
+    /* dt is a labelled term inside a dl, NOT a heading. Style it as
+       emphasized body text so it doesn't visually compete with the h4
+       it sits under. */
+    dl { margin: 0.5rem 0 1rem 0; }
+    dt {
+      font-weight: bold;
+      color: #333333;
+      font-size: 1rem;
+      margin-top: 0.75rem;
+    }
+    dt:first-of-type { margin-top: 0; }
+    dd { margin-left: 0; margin-top: 0.15rem; margin-bottom: 0.5rem; }
+
+    /* --- Table of contents ----------------------------------------------- */
+    .toc {
+      background-color: #F7F6F3;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      padding: 1rem 1rem 1rem 2.25rem;
+      margin: 1.5rem 0;
+    }
+    .toc h2 { font-size: 1.1rem; margin-top: 0; padding-bottom: 0; border-bottom: none; }
+    .toc ol[type="A"] > li { margin-bottom: 0.25rem; }
+    /* Table cross-references nested inside lettered/numbered TOC entries
+       render as indented links with no bullet marker. */
+    .toc ol ul {
+      list-style: none;
+      padding-left: 1rem;
+      margin: 0.15rem 0 0.35rem 0;
+    }
+    .toc .toc-other { margin-top: 0.5rem; padding-top: 0.4rem; border-top: 1px dashed #D8D8D8; list-style: none; padding-left: 0; }
+    .toc .toc-other li { display: inline-block; margin-right: 1rem; }
+    .toc ol { margin: 0.5rem 0 0 0.5rem; }
+    .toc ol ol { margin-left: 1rem; }
+    .toc li { margin-bottom: 0.2rem; }
+
+    /* --- Changelog ------------------------------------------------------- */
+    .changelog {
+      background-color: #F7F6F3;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .changelog h2 {
+      font-size: 1.1rem;
+      border-bottom: none;
+      margin-top: 0;
+    }
+    .changelog h3 {
+      font-size: 0.95rem;
+      color: #003A70;
+      border-bottom: none;
+      margin-top: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+    .changelog .date {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 0.25rem;
+    }
+    .changelog ul { margin-left: 1.25rem; margin-top: 0.25rem; }
+
+    /* --- Screenshots ----------------------------------------------------- */
+    figure { margin: 1rem 0; }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      display: block;
+    }
+    figcaption {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+
+    /* --- Misc ------------------------------------------------------------ */
+    hr { border: none; border-top: 1px solid #CCCCCC; margin: 1.5rem 0; }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background-color: #F7F6F3;
+      padding: 0.05rem 0.3rem;
+      border-radius: 2px;
+      font-size: 0.92em;
+    }
+    .last-updated {
+      font-size: 0.8rem;
+      color: #666666;
+      text-align: right;
+      margin-top: 2rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #E6E6E6;
+    }
+
+    /* --- Print ----------------------------------------------------------- */
+    @media print {
+      body { padding: 0; font-size: 11pt; max-width: none; }
+      h1 { border-bottom-color: #000000; }
+      thead th {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000;
+      }
+      .callout, .toc, .changelog {
+        border-left-width: 3px;
+        background-color: #FFFFFF !important;
+      }
+      .new-this-year { color: #000000; font-weight: bold; }
+      .new-this-year::before {
+        background: #FFFFFF;
+        color: #000000;
+        border: 1px solid #000000;
+      }
+      .skip-link { display: none; }
+      a { color: #000000; }
+    }
+
+    /* --- Responsive ------------------------------------------------------ */
+    @media (max-width: 600px) {
+      body { padding: 1rem; font-size: 13px; }
+      table { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <main id="main">
+
+    <h1>
+      EPP Performance Reporting Process Guide
+      <span class="subtitle">2025&ndash;2026 reporting cycle &middot; NCDPI Educator Preparation Team</span>
+    </h1>
+
+    <p>This guide explains the steps each Educator Preparation Program (EPP) follows to submit performance reporting data to the NC Department of Public Instruction (NCDPI) for the 2025&ndash;2026 reporting cycle. It covers the components you will submit, the templates and data specifications for each, and how to use the secure ShareFile system to exchange documents with NCDPI.</p>
+
+    <p><span class="legend-swatch">NEW 2025-26</span> Content marked with the red <strong>NEW 2025-26</strong> badge and dark red text is new or revised this year. Returning users can scan for the badge to find what has changed since last year.</p>
+
+    <!-- =================================================================
+         Table of contents
+         ================================================================= -->
+    <nav class="toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading">Contents</h2>
+      <ol type="A">
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#new-overview">New reporting requirements overview</a>
+          <ul><li><a href="#table-1">Table 1: Performance reporting components and submission deadlines</a></li></ul>
+        </li>
+        <li><a href="#components">Performance reporting components</a>
+          <ol>
+            <li><a href="#sharefile-staging">DPI stages data for EPPs in ShareFile</a></li>
+            <li><a href="#overview-narrative">Overview and narrative responses</a></li>
+            <li><a href="#mou-example">MOU example</a></li>
+            <li><a href="#applicants">EPP applicant submission</a>
+              <ul><li><a href="#table-2">Table 2: Data specifications for the applicant template</a></li></ul>
+            </li>
+            <li><a href="#students">Student characteristics</a>
+              <ul><li><a href="#table-3">Table 3: Data specifications for the student characteristics sheet</a></li></ul>
+            </li>
+            <li><a href="#program-details">Program details and service to public schools</a>
+              <ul><li><a href="#table-4">Table 4: Activity attributes</a></li></ul>
+            </li>
+            <li><a href="#data-validation">Data validation</a></li>
+            <li><a href="#effectiveness-data">DPI adds effectiveness data</a></li>
+            <li><a href="#data-check">Overall data check with EPPs</a></li>
+            <li><a href="#board-approval">Board approval</a></li>
+          </ol>
+        </li>
+        <li><a href="#sharefile-instructions">Instructions for accessing ShareFile</a></li>
+        <li><a href="#license-codes">Licensure areas and NCDPI codes</a>
+          <ul><li><a href="#table-5">Table 5: Licensure areas and NCDPI codes</a></li></ul>
+        </li>
+      </ol>
+      <ul class="toc-other">
+        <li><a href="#changelog">Changelog</a></li>
+        <li><a href="#questions">Questions?</a></li>
+      </ul>
+    </nav>
+
+    <!-- =================================================================
+         A. Purpose
+         ================================================================= -->
+    <section aria-labelledby="purpose">
+      <h2 id="purpose">A. Purpose</h2>
+
+      <p>The EPP performance reporting process is designed to:</p>
+      <ul>
+        <li>Meet expectations outlined in state board policy and legislation, national accreditation, and Title II reporting.</li>
+        <li>Provide a process that is easy to follow and useful to EPPs.</li>
+        <li>Improve efficiencies within DPI &mdash; producing data for each EPP, reducing error, and standardizing the process.</li>
+      </ul>
+    </section>
+
+    <!-- =================================================================
+         B. New reporting requirements overview
+         ================================================================= -->
+    <section aria-labelledby="new-overview" class="new-section">
+      <h2 id="new-overview"><span class="legend-swatch">NEW 2025-26</span> B. New reporting requirements overview</h2>
+
+      <p class="section-new-note">Every item in this section is new or revised for the 2025&ndash;2026 reporting cycle.</p>
+
+      <ul>
+        <li>DPI will strictly enforce the deadlines for each reporting component this year to streamline processing and improve efficiency. To support this, DPI will increase deadline communication through GovDelivery emails and the monthly EPP webinars. Please plan ahead:
+          <ul>
+            <li>Make sure everyone in your EPP who needs deadline notifications is subscribed to GovDelivery. To add or remove colleagues, email <a href="mailto:andrew.sioberg@dpi.nc.gov">andrew.sioberg@dpi.nc.gov</a> with the changes.</li>
+            <li>If something arises during the reporting season that may keep you from meeting a deadline, contact <a href="mailto:andrew.sioberg@dpi.nc.gov">andrew.sioberg@dpi.nc.gov</a> as soon as you are aware of it.</li>
+            <li>Attend the monthly EPP webinars to stay current with reporting expectations and to ask questions or raise concerns as they emerge.</li>
+          </ul>
+        </li>
+        <li>A new optional column on the student characteristics template captures an EPP&rsquo;s own institutional ID for the candidate (Column&nbsp;J). Several programs told us this would help with their internal data management. Populating it is optional.</li>
+        <li>The Date of Birth column has been split into three columns (F&nbsp;Day, G&nbsp;Month, H&nbsp;Year) to reduce errors caused by submissions that inadvertently swap day and month.</li>
+        <li>A new column (P) captures whether the candidate&rsquo;s program is a residency program (yes/no). This is especially useful for graduate-level residency candidates.</li>
+      </ul>
+
+      <!-- ---------- Table 1 ---------- -->
+      <h3 id="table-1" class="table-title"><span class="legend-swatch">NEW 2025-26</span> Table 1: Performance reporting components and submission deadlines</h3>
+      <div class="table-wrap">
+        <table aria-labelledby="table-1">
+          <thead>
+            <tr><th scope="col">Step</th><th scope="col">Description</th><th scope="col">Due</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">1. DPI stages data for EPPs in ShareFile</th><td>DPI provides templates and historical / prior-year data where available.</td><td class="new-this-year"><span class="due-date">06/01/2026</span></td></tr>
+            <tr><th scope="row">2. Overview and narrative responses</th><td>Previous year&rsquo;s information provided in Word on the secure folder (<code>1_NNNNNN_Overview.docx</code>).</td><td class="new-this-year"><span class="due-date">07/02/2026</span></td></tr>
+            <tr><th scope="row">3. One example MOU with a partnering district for student teaching</th><td>Submit an MOU executed between 08/01/2025 and 07/31/2026.</td><td class="new-this-year"><span class="due-date">07/02/2026</span></td></tr>
+            <tr><th scope="row">4. EPP applicant submission</th><td>Submit all applicants to your program between 08/01/2025 and 07/31/2026 (<code>5_NNNNNN_Applicants.xlsx</code>).</td><td class="new-this-year"><span class="due-date">08/03/2026</span></td></tr>
+            <tr><th scope="row">5. Student characteristics submission</th><td>Submit all students in your program between 08/01/2025 and 07/31/2026 (<code>3_NNNNNN_Students.xlsx</code>).</td><td class="new-this-year"><span class="due-date">08/28/2026</span></td></tr>
+            <tr><th scope="row">6. Program details and service to public schools</th><td>Submit faculty count, field supervisors, and service-to-schools details for 08/01/2025&ndash;07/31/2026 (<code>4_NNNNNN_[U,G,MSA]_Details.xlsx</code>).</td><td class="new-this-year"><span class="due-date">08/28/2026</span></td></tr>
+            <tr><th scope="row">7. Data validation</th><td>DPI reviews steps 4, 5, and 6 and works with EPPs as needed for completeness, corrections, and refinement.</td><td class="new-this-year"><span class="due-date">Sept/Oct 2026</span></td></tr>
+            <tr><th scope="row">8. DPI adds effectiveness data</th><td>DPI joins effectiveness data to the EPP student data.</td><td class="new-this-year"><span class="due-date">Dec 2026</span></td></tr>
+            <tr><th scope="row">9. Overall data check with EPPs</th><td>EPPs review their restricted-access dashboards for accuracy. Where misalignment exists, DPI works with the EPP to align.</td><td class="new-this-year"><span class="due-date">Dec 2026 / Jan 2027</span></td></tr>
+            <tr><th scope="row">10. Board approval</th><td>Materials are presented to the State Board of Education.</td><td class="new-this-year"><span class="due-date">Feb / Mar 2027</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Each step applies to undergraduate, master&rsquo;s, and MSA programs, with two exceptions:</p>
+      <ul>
+        <li>Service to public schools is <strong>not</strong> required for master&rsquo;s programs.</li>
+        <li>The student characteristics file your institution receives includes students in undergraduate, graduate, and MSA programs (where applicable) and covers all programs that lead to a license at your EPP.</li>
+      </ul>
+    </section>
+
+    <!-- =================================================================
+         C. Performance reporting components
+         ================================================================= -->
+    <section aria-labelledby="components">
+      <h2 id="components">C. Performance reporting components</h2>
+      <p>Refer to <a href="#table-1">Table&nbsp;1</a> for due dates.</p>
+
+      <div class="callout">
+        <p><span class="callout-title">After every upload</span>Email <a href="mailto:andrew.sioberg@dpi.nc.gov">andrew.sioberg@dpi.nc.gov</a> to confirm that your file is ready for processing. This applies to every reporting component &mdash; the overview and narrative responses, the MOU example, the applicant submission, the student characteristics file, and the program details file.</p>
+      </div>
+
+      <!-- ---------- C.1 ShareFile staging ---------- -->
+      <section aria-labelledby="sharefile-staging">
+        <h3 id="sharefile-staging">C.1 DPI stages data for EPPs in ShareFile</h3>
+        <p>By June&nbsp;1, 2026, DPI will populate each program&rsquo;s ShareFile folder with the templates and prior-year submissions needed to compile your 2025&ndash;2026 data. If we are able to stage these documents earlier, we will notify the field by email through GovDelivery to deans and program leads.</p>
+      </section>
+
+      <!-- ---------- C.2 Overview and narrative ---------- -->
+      <section aria-labelledby="overview-narrative">
+        <h3 id="overview-narrative">C.2 Overview and narrative responses to legislative requirements</h3>
+
+        <p>Some required information changes little year to year, so this section is pre-populated with your previous year&rsquo;s submission as a starting point. You will receive one Word document per program level your EPP offers (undergraduate, graduate, MSA), located on ShareFile and named <code>1_NNNNNN_<var>Level</var>_Overview</code>, where <code>NNNNNN</code> is your six-digit federal institution code and <var>Level</var> is one of <code>U</code>, <code>G</code>, or <code>MSA</code>.</p>
+
+        <p>Undergraduate programs answer a broader set of questions than graduate or MSA programs.</p>
+
+        <h4>Undergraduate program steps</h4>
+        <ol>
+          <li>Download your previous year&rsquo;s overview and narrative files from ShareFile (see <a href="#sharefile-instructions">Section&nbsp;D</a>).</li>
+          <li>Carefully review the previous year&rsquo;s responses and update them as needed. Common items to revisit are enrollment numbers, programs offered, and overarching strategies.</li>
+          <li>Save your work as a Word document and upload it back to ShareFile.</li>
+        </ol>
+
+        <h4>Graduate and MSA program steps</h4>
+        <ol>
+          <li>Download your institution&rsquo;s overview file(s) from ShareFile (see <a href="#sharefile-instructions">Section&nbsp;D</a>).</li>
+          <li>Carefully review and update the previous year&rsquo;s responses. Only the <strong>Overview</strong> and <strong>Special Features</strong> sections need to be addressed.</li>
+          <li>Save your work for your records and upload the completed document back to ShareFile.</li>
+        </ol>
+
+        <div class="callout">
+          <p><span class="callout-title">Due</span>Any time between receipt and <span class="due-date">July&nbsp;2, 2026</span>.</p>
+        </div>
+      </section>
+
+      <!-- ---------- C.3 MOU ---------- -->
+      <section aria-labelledby="mou-example">
+        <h3 id="mou-example">C.3 MOU example</h3>
+
+        <p>Upload one current MOU with an LEA for the undergraduate program to ShareFile alongside the narrative response. You <strong>do not</strong> need to submit an MOU for every LEA &mdash; one example is sufficient.</p>
+
+        <div class="callout tip">
+          <span class="callout-title">Tip &mdash; common MOU template</span>
+          <p>NCACTE has developed a common MOU template for EPPs. Using it is not required, but it is a thoughtful starting point if you are creating a new MOU or refreshing an existing one. We strongly encourage everyone to review it for gaps in their own MOU coverage. The document is on the <a href="https://www.dpi.nc.gov/educators/educator-preparation/faq-updates">NCDPI Educator Preparation FAQ &amp; Updates page</a>. Thanks to NCACTE for the work they put into this resource.</p>
+        </div>
+
+        <p>Save the document to the secure folder as a Word document with the file name <code>2_NNNNNN_MOU_DDMMYYYY</code>, where <code>NNNNNN</code> is your six-digit federal institution code and <code>DDMMYYYY</code> is the submission date. The date helps when there are multiple versions in the secure folder.</p>
+
+        <div class="callout">
+          <p><span class="callout-title">Due</span>Any time between receipt and <span class="due-date">July&nbsp;2, 2026</span>.</p>
+        </div>
+      </section>
+
+      <!-- ---------- C.4 Applicants ---------- -->
+      <section aria-labelledby="applicants">
+        <h3 id="applicants">C.4 EPP applicant submission</h3>
+
+        <p>State law requires NCDPI to report on Teach&nbsp;NC&rsquo;s impact on attracting candidates to teaching. To support this, each EPP&rsquo;s ShareFile folder includes an applicant template (<code>5_NNNNNN_Applicants.xlsx</code>) for individual-level applicant data.</p>
+
+        <p>The reporting period is August&nbsp;1, 2025 &ndash; July&nbsp;31, 2026. Provide all applicants to your EPP during that window.</p>
+
+        <ol>
+          <li>Locate the applicant template in your ShareFile folder under <code>SY2025-26</code>: <code>5_NNNNNN_Applicants.xlsx</code>.</li>
+          <li>Populate the data for each applicant according to <a href="#table-2">Table&nbsp;2</a> below.</li>
+          <li>Upload the completed file to <a href="https://ncdpi.sharefile.com">ShareFile</a> on or before <span class="due-date">August&nbsp;3, 2026</span> and email <a href="mailto:andrew.sioberg@dpi.nc.gov">andrew.sioberg@dpi.nc.gov</a> to confirm submission.</li>
+        </ol>
+
+        <div class="callout">
+          <p><span class="callout-title">Note</span>Include applicants to your <em>EPP</em> only, not to the institution overall.</p>
+        </div>
+
+        <!-- ---------- Table 2 ---------- -->
+        <h4 id="table-2" class="table-title">Table 2: Data specifications for the applicant template</h4>
+        <p class="table-legend"><span class="legend-swatch">NEW 2025-26</span> Red text indicates a field that is new or changed for the 2025&ndash;2026 reporting cycle.</p>
+        <div class="table-wrap">
+          <table aria-labelledby="table-2">
+            <thead>
+              <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Permitted values</th>
+                <th scope="col">Description</th>
+                <th scope="col">Required</th>
+                <th scope="col">Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">EPP Code</th><td><code>NNNNNN</code></td><td>Six-digit institution code</td><td>Y</td><td>002945</td></tr>
+              <tr><th scope="row">SSN</th><td><code>NNNNNNNNN</code></td><td>Applicant&rsquo;s social security number</td><td>Y</td><td>000000000</td></tr>
+              <tr><th scope="row">First name</th><td>Character</td><td>Applicant&rsquo;s first name</td><td>Y</td><td>Sara</td></tr>
+              <tr><th scope="row">Last name</th><td>Character</td><td>Applicant&rsquo;s last name</td><td>Y</td><td>Johnson</td></tr>
+              <tr><th scope="row" class="new-this-year">DOB Day</th><td class="new-this-year"><code>DD</code></td><td class="new-this-year">Applicant&rsquo;s day of birth</td><td class="new-this-year">Y</td><td class="new-this-year">11</td></tr>
+              <tr><th scope="row" class="new-this-year">DOB Month</th><td class="new-this-year"><code>MM</code></td><td class="new-this-year">Applicant&rsquo;s month of birth</td><td class="new-this-year">Y</td><td class="new-this-year">6</td></tr>
+              <tr><th scope="row" class="new-this-year">DOB Year</th><td class="new-this-year"><code>YYYY</code></td><td class="new-this-year">Applicant&rsquo;s year of birth</td><td class="new-this-year">Y</td><td class="new-this-year">1900</td></tr>
+              <tr><th scope="row" class="new-this-year">Application Month</th><td class="new-this-year"><code>MM</code></td><td class="new-this-year">The month the application was received</td><td class="new-this-year">Y</td><td class="new-this-year">7</td></tr>
+              <tr><th scope="row" class="new-this-year">Application Year</th><td class="new-this-year"><code>YYYY</code></td><td class="new-this-year">The year the application was received</td><td class="new-this-year">Y</td><td class="new-this-year">2025</td></tr>
+              <tr><th scope="row">Accepted</th><td><code>Y</code>, <code>N</code></td><td>Whether the applicant was accepted</td><td>Y</td><td>N</td></tr>
+              <tr><th scope="row" class="new-this-year">Accepted Month</th><td class="new-this-year"><code>MM</code></td><td class="new-this-year">The month the applicant was accepted</td><td class="new-this-year">Y</td><td class="new-this-year">9</td></tr>
+              <tr><th scope="row" class="new-this-year">Accepted Year</th><td class="new-this-year"><code>YYYY</code></td><td class="new-this-year">The year the applicant was accepted</td><td class="new-this-year">Y</td><td class="new-this-year">2025</td></tr>
+              <tr><th scope="row">Ethnicity</th><td><code>B</code>, <code>I</code>, <code>A</code>, <code>H</code>, <code>P</code>, <code>W</code>, <code>M</code>, <code>N</code></td><td>(B)&nbsp;Black; (I)&nbsp;American Indian / Alaskan Native; (A)&nbsp;Asian; (H)&nbsp;Hispanic; (P)&nbsp;Pacific Islander; (W)&nbsp;White; (M)&nbsp;Multiple Races; (N)&nbsp;Unknown</td><td>Y</td><td>H</td></tr>
+              <tr><th scope="row">Gender</th><td><code>F</code>, <code>M</code>, <code>O</code></td><td>(F)&nbsp;Female; (M)&nbsp;Male; (O)&nbsp;Other</td><td>Y</td><td>M</td></tr>
+              <tr><th scope="row">Email address</th><td>Alphanumeric</td><td>Applicant&rsquo;s personal email address</td><td>Y</td><td>dave.smith@gmail.com</td></tr>
+              <tr><th scope="row">Degree</th><td><code>U</code>, <code>ULO</code>, <code>R</code>, <code>G</code>, <code>GLO</code>, <code>GFA</code>, <code>GSA</code>, <code>GNA</code></td><td><strong>Type of degree pursued:</strong> (U)&nbsp;Undergraduate; (ULO)&nbsp;Undergraduate Licensure Only; (R)&nbsp;Residency; (G)&nbsp;Graduate degree in non-teaching areas; (GLO)&nbsp;Graduate Licensure Only (no degree, non-degree-seeking); (GFA)&nbsp;Graduate degree and first license; (GSA)&nbsp;Graduate degree to upgrade in a license area already held; (GNA)&nbsp;Graduate degree in a new license area added to existing license</td><td>Y</td><td>GLO</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ---------- C.5 Student characteristics ---------- -->
+      <section aria-labelledby="students">
+        <h3 id="students">C.5 Student characteristics</h3>
+
+        <p>The student characteristics Excel file contains information for all programs your institution offers (undergraduate, graduate, and/or MSA). It captures self-reported descriptive information about students enrolled in your institution&rsquo;s programs &mdash; entrance and completion data, licensure, and testing results. The pre-populated file includes information from your previous year&rsquo;s report, except for students who have already graduated. The goal is to capture all active students in 2025&ndash;2026 who have <em>formally</em> started your program. Do not include students who have only expressed interest or who have listed education as a major but have not yet been formally admitted.</p>
+
+        <p>Complete the file using the two worksheets in <code>3_NNNNNN_Students</code> in your secure folder:</p>
+        <ul>
+          <li><strong>2. Update prior students</strong> &mdash; update the enrollment status of students you reported last year. If a student is no longer enrolled, select that choice in the Status column. Do <em>not</em> use this sheet to add new students.</li>
+          <li><strong>3. Add new students</strong> &mdash; add students who enrolled between August&nbsp;1, 2025 and July&nbsp;31, 2026.</li>
+        </ul>
+
+        <h4>What&rsquo;s new in the student characteristics template</h4>
+        <ul>
+          <li><span class="new-this-year">EPP&nbsp;ID is an optional column where you can enter your institution&rsquo;s own ID for each candidate.</span> DPI does not use this field for reporting; several programs requested it for their own data management.</li>
+          <li><span class="new-this-year">Date of birth is now collected in three columns: Day, Month, Year.</span> This reduces errors that occurred when day and month were entered into a single field. Enter each value as a number (no leading zeros required, and no spelled-out months).</li>
+          <li><span class="new-this-year">The Residency column verifies whether each student is enrolled in a residency program.</span> This improves reporting accuracy, particularly for graduate students in residency.</li>
+        </ul>
+
+        <h4>Definitions: admitted vs. enrolled</h4>
+        <dl>
+          <dt>Admitted (month and year)</dt>
+          <dd>The point at which the student accepted an offer from the EPP &mdash; the EPP, not the university. A student&rsquo;s admit date is expected to precede their enroll date.</dd>
+          <dt>Enrolled (month and year)</dt>
+          <dd>The point at which the student begins classes with the EPP &mdash; again, the EPP, not the university. A student&rsquo;s enroll date is expected to follow their admit date.</dd>
+        </dl>
+
+        <h4>Building a custom column</h4>
+        <p>NCDPI offers each EPP up to two custom columns in the student characteristics file. The custom columns can be used in EPP restricted-access dashboards as additional disaggregation options alongside degree, license area, gender, etc.</p>
+
+        <p>Some ways EPPs use them:</p>
+        <ul>
+          <li>Assigning students directly to your internal programs, when those programs do not map cleanly to NCDPI&rsquo;s degree and license areas.</li>
+          <li>Marking who received a programmatic intervention so you can track outcomes in subsequent years.</li>
+          <li>Tracking the LEA or school where candidates do their student teaching.</li>
+        </ul>
+
+        <div class="callout tip">
+          <span class="callout-title">Data privacy &mdash; custom columns</span>
+          <ul>
+            <li>NCDPI does not need to know what the values in custom columns mean. You can use plain labels (e.g., &ldquo;Participated&rdquo; / &ldquo;Not Participated&rdquo;) or coded values (&ldquo;A&rdquo; / &ldquo;B&rdquo;).</li>
+            <li>The EPP is responsible for tracking what each custom column stands for and what its values denote.</li>
+            <li>Custom-column data is shared only with the EPP and NCDPI staff who already have access to the student characteristics file.</li>
+            <li>Custom columns appear only on restricted-access dashboards, never on public-facing dashboards.</li>
+            <li><span class="new-this-year">If you used a specific custom column last year, use it the same way this year.</span> For example, if <code>custom_1</code> denoted EPP-specific programs last year, keep using <code>custom_1</code> for that purpose. Need additional custom columns? Reach out to the NCDPI team.</li>
+            <li><span class="new-this-year">If you used a custom column for your own EPP student ID last year, NCDPI will move those values to the new EPP&nbsp;ID column.</span> The freed-up custom column is available for something else.</li>
+          </ul>
+          <p>Questions about using custom columns? Email <a href="mailto:patrick.dougherty@dpi.nc.gov">patrick.dougherty@dpi.nc.gov</a> or <a href="mailto:andy.baxter@dpi.nc.gov">andy.baxter@dpi.nc.gov</a>.</p>
+        </div>
+
+        <!-- ---------- Table 3 ---------- -->
+        <h4 id="table-3" class="table-title">Table 3: Data specifications for the student characteristics sheet</h4>
+        <p class="table-legend"><span class="legend-swatch">NEW 2025-26</span> Red text indicates a field that is new or changed for the 2025&ndash;2026 reporting cycle.</p>
+        <div class="table-wrap">
+          <table aria-labelledby="table-3">
+            <thead>
+              <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Permitted values</th>
+                <th scope="col">Description</th>
+                <th scope="col">Required</th>
+                <th scope="col">Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">EPP Code</th><td><code>NNNNNN</code></td><td>Six-digit institution code</td><td>Y</td><td>002965</td></tr>
+              <tr><th scope="row">EPP Name</th><td>Character</td><td>Name of educator preparation program</td><td>Y</td><td>Bennett College</td></tr>
+              <tr><th scope="row">SSN</th><td><code>NNNNNNNNN</code></td><td>Student&rsquo;s social security number. If a candidate does not have an SSN or is unwilling to provide one, type <code>missing</code> in this cell</td><td>Y, if UID is missing</td><td>000000000</td></tr>
+              <tr><th scope="row">UID</th><td><code>NNNNNNNNNN</code></td><td>Student&rsquo;s NCDPI-issued UID (not school ID)</td><td>Y, if SSN is missing</td><td>1234567890</td></tr>
+              <tr><th scope="row" class="new-this-year">EPP ID</th><td class="new-this-year"><code>NNNNNNNNNN</code></td><td class="new-this-year">Student&rsquo;s school or EPP-issued ID</td><td class="new-this-year">N</td><td class="new-this-year">1234567890</td></tr>
+              <tr><th scope="row">Last Name</th><td>Character</td><td>Student&rsquo;s last name</td><td>Y</td><td>Johnson</td></tr>
+              <tr><th scope="row">First Name</th><td>Character</td><td>Student&rsquo;s first name</td><td>Y</td><td>Sara</td></tr>
+              <tr><th scope="row" class="new-this-year">DOB Day</th><td class="new-this-year"><code>DD</code></td><td class="new-this-year">Student&rsquo;s day of birth</td><td class="new-this-year">Y</td><td class="new-this-year">11</td></tr>
+              <tr><th scope="row" class="new-this-year">DOB Month</th><td class="new-this-year"><code>MM</code></td><td class="new-this-year">Student&rsquo;s month of birth</td><td class="new-this-year">Y</td><td class="new-this-year">6</td></tr>
+              <tr><th scope="row" class="new-this-year">DOB Year</th><td class="new-this-year"><code>YYYY</code></td><td class="new-this-year">Student&rsquo;s year of birth</td><td class="new-this-year">Y</td><td class="new-this-year">1900</td></tr>
+              <tr><th scope="row">License number</th><td><code>NNNNNNNNN</code></td><td>Student&rsquo;s license number, where the student is licensed (residency students)</td><td>Y, if UID and SSN are both missing</td><td>98756432</td></tr>
+              <tr><th scope="row">Degree</th><td><code>U</code>, <code>ULO</code>, <code>R</code>, <code>G</code>, <code>GLO</code>, <code>GFA</code>, <code>GSA</code>, <code>GNA</code></td><td><strong>Type of degree pursued:</strong> (U)&nbsp;Undergraduate; (ULO)&nbsp;Undergraduate Licensure Only; (R)&nbsp;Residency; (G)&nbsp;Graduate degree in non-teaching areas; (GLO)&nbsp;Graduate Licensure Only; (GFA)&nbsp;Graduate degree and first license; (GSA)&nbsp;Graduate degree to upgrade in a held license area; (GNA)&nbsp;Graduate degree in a new license area added to an existing license</td><td>Y</td><td>ULO</td></tr>
+              <tr><th scope="row" class="new-this-year">Residency</th><td class="new-this-year"><code>Y</code>, <code>N</code></td><td class="new-this-year">Whether the candidate is enrolled in a residency program</td><td class="new-this-year">Y</td><td class="new-this-year">Y</td></tr>
+              <tr><th scope="row">Status</th><td><code>NE</code>, <code>P</code>, <code>C</code></td><td>(NE)&nbsp;Not Enrolled; (P)&nbsp;Pipeline; (C)&nbsp;Program Completed</td><td>Y</td><td>P</td></tr>
+              <tr><th scope="row">Gender</th><td><code>F</code>, <code>M</code>, <code>O</code></td><td>(F)&nbsp;Female; (M)&nbsp;Male; (O)&nbsp;Other</td><td>Y</td><td>F</td></tr>
+              <tr><th scope="row">Ethnicity</th><td><code>B</code>, <code>I</code>, <code>A</code>, <code>H</code>, <code>P</code>, <code>W</code>, <code>M</code>, <code>N</code></td><td>(B)&nbsp;Black; (I)&nbsp;American Indian / Alaskan Native; (A)&nbsp;Asian; (H)&nbsp;Hispanic; (P)&nbsp;Pacific Islander; (W)&nbsp;White; (M)&nbsp;Multiple Races; (N)&nbsp;Unknown</td><td>Y</td><td>M</td></tr>
+              <!-- Zipcode row removed for 2026 — was strikethrough + red in source.docx, indicating it was deprecated. -->
+              <tr><th scope="row">Month admitted</th><td><code>NN</code></td><td>The month a candidate accepted an offer from the EPP. The admit date is expected to precede the enrollment date</td><td>Y</td><td>10</td></tr>
+              <tr><th scope="row">Calendar year admitted</th><td><code>NNNN</code></td><td>The calendar year a candidate accepted an offer from the EPP</td><td>Y</td><td>2021</td></tr>
+              <tr><th scope="row">Month enrolled</th><td><code>NN</code></td><td>The month a candidate begins coursework with the EPP</td><td>Y</td><td>08</td></tr>
+              <tr><th scope="row">Calendar year enrolled</th><td><code>NNNN</code></td><td>The calendar year a candidate begins coursework with the EPP</td><td>Y</td><td>2022</td></tr>
+              <tr><th scope="row">Month completed</th><td><code>NN</code></td><td>The month a candidate completed the teacher education program. DPI defines completion as the point at which a candidate has met all program requirements</td><td>Y</td><td>12</td></tr>
+              <tr><th scope="row">Calendar year completed</th><td><code>NNNN</code></td><td>The calendar year a candidate completed the program</td><td>Y</td><td>2025</td></tr>
+              <tr><th scope="row">FT/PT</th><td><code>F</code>, <code>P</code></td><td>(F)&nbsp;Full Time; (P)&nbsp;Part Time</td><td>Y</td><td>F</td></tr>
+              <tr><th scope="row">GPA</th><td><code>N.NN</code></td><td>GPA at time of formal admittance to teacher education (or program admittance for graduate programs). Report to the hundredth decimal</td><td>Y</td><td>3.25</td></tr>
+              <tr><th scope="row">Licensecode 1&ndash;n</th><td><code>NNNNN</code></td><td>The five-digit licensure code for the student&rsquo;s program of study. For multiple license areas, use Licensecode&nbsp;1 for the primary license and Licensecode&nbsp;2 for the secondary</td><td>Y</td><td>00025</td></tr>
+              <tr><th scope="row">SAT total</th><td><code>NNNN</code></td><td>Student&rsquo;s SAT total score. Important for verifying Praxis Core exemption. Provide all SAT data you have for every candidate</td><td>Y</td><td>1120</td></tr>
+              <tr><th scope="row">SAT math</th><td><code>NNN</code></td><td>Student&rsquo;s SAT math score</td><td>Y</td><td>600</td></tr>
+              <tr><th scope="row">SAT verbal</th><td><code>NNN</code></td><td>Student&rsquo;s SAT verbal score</td><td>Y</td><td>520</td></tr>
+              <tr><th scope="row">ACT composite</th><td><code>NN</code></td><td>Student&rsquo;s ACT total score. Important for verifying Praxis Core exemption. Provide all ACT data you have for every candidate</td><td>Y</td><td>33</td></tr>
+              <tr><th scope="row">ACT math</th><td><code>NN</code></td><td>Student&rsquo;s ACT math score</td><td>Y</td><td>16</td></tr>
+              <tr><th scope="row">ACT verbal</th><td><code>NN</code></td><td>Student&rsquo;s ACT verbal score</td><td>Y</td><td>17</td></tr>
+              <tr><th scope="row">Core combined</th><td><code>NNN</code></td><td>Total score of math, reading, and writing on the Praxis I series. If exempt due to SAT or ACT scores, place &ldquo;exempt&rdquo; in the cell. Make sure the corresponding SAT or ACT scores appear in their fields</td><td>Y, or &ldquo;exempt&rdquo;</td><td>478, &ldquo;exempt&rdquo;</td></tr>
+              <tr><th scope="row">Core math</th><td><code>NNN</code></td><td>Praxis I math score. Same exemption rules as Core combined</td><td>Y, or &ldquo;exempt&rdquo;</td><td>478, &ldquo;exempt&rdquo;</td></tr>
+              <tr><th scope="row">Core writing</th><td><code>NNN</code></td><td>Praxis I writing score. Same exemption rules</td><td>Y, or &ldquo;exempt&rdquo;</td><td>478, &ldquo;exempt&rdquo;</td></tr>
+              <tr><th scope="row">Core reading</th><td><code>NNN</code></td><td>Praxis I reading score. Same exemption rules</td><td>Y, or &ldquo;exempt&rdquo;</td><td>478, &ldquo;exempt&rdquo;</td></tr>
+              <tr><th scope="row">custom_1</th><td>Character</td><td>EPP-defined value</td><td>N</td><td>Variable</td></tr>
+              <tr><th scope="row">custom_2</th><td>Character</td><td>EPP-defined value</td><td>N</td><td>Variable</td></tr>
+              <tr><th scope="row">TeachingFellow</th><td><code>Y</code>, <code>N</code></td><td>If the candidate is a NC Teaching Fellow, indicate &ldquo;Y&rdquo;. Otherwise leave blank</td><td>Y, for EPPs with NC Teaching Fellows</td><td>Variable</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Review checklist</h4>
+        <ul>
+          <li><strong>Identifiers (SSN, UID, license number, birthdate):</strong> SSN or UID is critical for connecting state datasets. If neither is available for a residency candidate, provide the license number from the online licensure portal. Birthdate further improves the match.</li>
+          <li><strong>SAT and ACT scores:</strong> programs sometimes overlook entrance exam fields. Scroll left to right in the file and populate every score you have. Provide SAT scores for all students, not only those exempt from entrance exams.</li>
+          <li><strong>Part-time / full-time status:</strong> verify each student&rsquo;s status.</li>
+          <li><strong>Ethnicity and gender:</strong> double-check both fields for every student.</li>
+        </ul>
+
+        <div class="callout warning">
+          <span class="callout-title">Submit in the exact template format</span>
+          <p>Submit the student characteristics file in the exact column order provided. Files that depart from the template will be returned for revision &mdash; the program that loads the file into our database depends on the field positions and names.</p>
+        </div>
+
+        <div class="callout">
+          <p><span class="callout-title">Due</span>Any time between receipt and <span class="due-date">August&nbsp;28, 2026</span>.</p>
+        </div>
+      </section>
+
+      <!-- ---------- C.6 Program details ---------- -->
+      <section aria-labelledby="program-details">
+        <h3 id="program-details">C.6 Program details and service to public schools</h3>
+        <p>A single Excel file captures all remaining program details and service-to-public-schools data in a format that can be loaded into our dashboard system. The file is organized as a series of tabs across the bottom of the sheet, each corresponding to one data collection. Different tabs apply to different program levels (undergraduate, graduate, MSA).</p>
+
+        <p>Files are located on ShareFile and named <code>4_NNNNNN_<var>Level</var>_Details</code>, where <code>NNNNNN</code> is your six-digit federal institution code and <var>Level</var> is one of <code>U</code>, <code>G</code>, or <code>MSA</code>. Some EPPs will have as many as three files (U, G, and MSA); others will have only one.</p>
+
+        <div class="callout warning">
+          <p>Do <strong>not</strong> alter the format of these pages. Format changes break the upload process.</p>
+        </div>
+
+        <div class="callout">
+          <p><span class="callout-title">Due</span>Any time between receipt and <span class="due-date">August&nbsp;28, 2026</span>.</p>
+        </div>
+
+        <h4>Instructions tab (undergraduate, graduate, MSA)</h4>
+        <p>The instructions tab asks for your EPP name, the person submitting the file, and that person&rsquo;s email address. This helps us follow up if we need clarifications.</p>
+
+        <h4>Faculty count tab (undergraduate)</h4>
+        <p>Provide three counts:</p>
+        <ul>
+          <li>Undergraduate, full-time faculty in your EPP.</li>
+          <li>Full-time faculty at your institution who teach only part-time within your EPP.</li>
+          <li>Part-time faculty in your EPP who are not employed elsewhere in your institution.</li>
+        </ul>
+        <p>Enter <code>0</code> for any category with no faculty &mdash; do not leave the cell blank.</p>
+
+        <h4>Field supervisors tab (undergraduate)</h4>
+        <p>This tab captures the average number of undergraduate students assigned to each field supervisor (including both internships and residencies). For example, if you average 10 students per field supervisor, enter <code>10</code>.</p>
+
+        <h4>Service tab (undergraduate and MSA)</h4>
+        <p>The service-to-schools tab is required for all undergraduate and MSA programs. Master&rsquo;s programs are exempt. This is a record of your EPP&rsquo;s interactions with public schools over the reporting year &mdash; <em>outside</em> normal EPP activities. Do <strong>not</strong> include student teaching, internships, or residencies.</p>
+
+        <p>Examples of activities to include:</p>
+        <ul>
+          <li>Service to or collaboration with LEAs, or formal partnerships between your IHE and schools or districts.</li>
+          <li>Systems that support residency pathways, beginning teachers, or career educators.</li>
+        </ul>
+
+        <p>Use <a href="#table-4">Table&nbsp;4</a> to understand what each field captures.</p>
+
+        <!-- ---------- Table 4 ---------- -->
+        <h4 id="table-4" class="table-title">Table 4: Activity attributes</h4>
+        <div class="table-wrap">
+          <table aria-labelledby="table-4">
+            <thead>
+              <tr>
+                <th scope="col">Activity attribute</th>
+                <th scope="col">What to capture</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Activity name or title</th><td>General description of the offering &mdash; for example, professional development for teachers, research collection, support, or recording.</td></tr>
+              <tr><th scope="row">LEAs / schools with whom the institution has formal collaborative plans</th><td>The places where your collaboration takes place (a district, multiple districts, a school, multiple schools). &ldquo;Formal collaborative plans&rdquo; means something your institution and the LEA mutually agreed to work on together &mdash; not a chance activity, and not something that falls within the standard activity of a teacher preparation program (e.g., student teaching, field experiences).</td></tr>
+              <tr><th scope="row">Start and end dates</th><td>When the interaction took place.</td></tr>
+              <tr><th scope="row">Priorities identified in collaboration with LEAs / schools</th><td>The areas the activity seeks to address, improve, or enhance &mdash; e.g., a reading initiative, digital learning, behavior management practice.</td></tr>
+              <tr><th scope="row">Number of participants</th><td>The number of people attending the activity.</td></tr>
+              <tr><th scope="row">Activities and / or programs implemented to address the priorities</th><td>Brief description of the treatment, activity, or work you provided.</td></tr>
+              <tr><th scope="row">Summary of the outcome</th><td>When the activity was over, what were the lessons learned and the takeaways?</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Your next steps for this collection</h4>
+        <ol>
+          <li>Report all interactions your program had with LEAs between August&nbsp;1, 2025 and July&nbsp;31, 2026 in the &ldquo;Service&rdquo; tab. <strong>If you need additional space, continue adding offerings to the right.</strong></li>
+          <li>Save your work for your records, and upload the completed document to ShareFile. The file name on upload should match the staged version, with the date of submission appended.</li>
+        </ol>
+      </section>
+
+      <!-- ---------- C.7 Data validation ---------- -->
+      <section aria-labelledby="data-validation">
+        <h3 id="data-validation">C.7 Data validation</h3>
+        <p>The Department runs system checks against incoming data to reduce errors at submission. When the applicant submission, student characteristics, or program details files arrive in ShareFile, they are reviewed using these checks.</p>
+        <p>After you confirm a file is ready for processing, expect to be contacted with adjustments. We will identify specific places where follow-up review is needed. Plan for this iteration: prompt response keeps the data accurate and the timeline on track.</p>
+      </section>
+
+      <!-- ---------- C.8 Effectiveness data ---------- -->
+      <section aria-labelledby="effectiveness-data">
+        <h3 id="effectiveness-data">C.8 DPI adds effectiveness data</h3>
+        <p>NCDPI receives EVAAS and NCEES data from the prior school year in late fall (usually November). These data measure teacher effectiveness across the state. Where they connect to a teacher who recently completed an EPP, they become one of the multiple measures used in the legal accountability framework for monitoring EPPs. Once we have the EVAAS data, processing it for reporting takes a few weeks. <strong>No action is required from EPPs at this step.</strong></p>
+      </section>
+
+      <!-- ---------- C.9 Overall data check ---------- -->
+      <section aria-labelledby="data-check">
+        <h3 id="data-check">C.9 Overall data check with EPPs</h3>
+        <p>DPI publishes the collected EPP data through the online dashboard system. Before public release and before bringing the dashboards to the State Board of Education for approval, DPI provides each EPP with restricted access to dashboards in January for an accuracy review. Each EPP can also schedule a one-on-one meeting with NCDPI to review materials and raise questions or concerns.</p>
+        <p>Specific dashboard access details and meeting availability will be announced at one of the monthly EPP webinars closer to January.</p>
+      </section>
+
+      <!-- ---------- C.10 Board approval ---------- -->
+      <section aria-labelledby="board-approval">
+        <h3 id="board-approval">C.10 Board approval</h3>
+        <p>EPP reporting will be presented to the State Board of Education as a discussion item in February&nbsp;2027. The board would then vote on approval the following month, in March&nbsp;2027.</p>
+      </section>
+    </section>
+
+    <!-- =================================================================
+         D. ShareFile instructions
+         ================================================================= -->
+    <section aria-labelledby="sharefile-instructions">
+      <h2 id="sharefile-instructions">D. Instructions for accessing ShareFile</h2>
+
+      <p>To protect student information, NCDPI uses <a href="https://ncdpi.sharefile.com">ShareFile</a> to exchange documents with EPPs. <em>You must be added as a user to your directory before you can sign in.</em> If you are new to the reporting process, contact your EPP&rsquo;s point of contact. If you do not know who that is, email Andrew Sioberg at <a href="mailto:andrew.sioberg@dpi.nc.gov">andrew.sioberg@dpi.nc.gov</a>.</p>
+
+      <ol>
+        <li>
+          <p>Open <a href="https://ncdpi.sharefile.com">ncdpi.sharefile.com</a> in a web browser.</p>
+          <figure>
+            <img src="_media/media/image1.png" alt="ShareFile sign-in screen showing username and password fields and a Sign In button.">
+            <figcaption>ShareFile sign-in screen.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <p>Sign in using <strong>Guest Sign-In</strong>. After signing in you will land in your EPP&rsquo;s parent directory.</p>
+          <figure>
+            <img src="_media/media/image2.png" alt="ShareFile parent directory listing folders for the EPP.">
+            <figcaption>EPP parent directory after sign-in.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <p>The current year&rsquo;s data templates are saved in the directory for school year <code>SY2025-26</code>.</p>
+          <figure>
+            <img src="_media/media/image3.png" alt="ShareFile file listing inside the SY2025-26 folder.">
+            <figcaption>SY2025-26 folder contents.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <p>Once you have made revisions to a file, <strong>name the file the same as it was originally posted in your directory and append the submission date with a <code>_DDMMYYYY</code> extension.</strong> The date helps everyone track which version is most recent.</p>
+          <p>For example: <code>1_NNNNNN_<var>Level</var>_Overview_06162026</code>.</p>
+        </li>
+        <li>
+          <p>Detailed steps for updating templates are in the <em>ShareFile Quick Reference Guide</em>, also located in your ShareFile folder.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- =================================================================
+         E. License codes
+         ================================================================= -->
+    <section aria-labelledby="license-codes">
+      <h2 id="license-codes">E. Licensure areas and NCDPI codes</h2>
+
+      <p>The NCDPI license codes used for the <code>Licensecode</code> fields in the student characteristics template are listed below.</p>
+
+      <h3 id="table-5" class="table-title">Table 5: Licensure areas and NCDPI codes</h3>
+      <div class="table-wrap">
+        <table aria-labelledby="table-5">
+          <thead>
+            <tr>
+              <th scope="col">License area</th>
+              <th scope="col">License code</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Birth&ndash;Kindergarten</th><td><code>00014</code></td></tr>
+            <tr><th scope="row">Preschool Add-on</th><td><code>00015</code></td></tr>
+            <tr><th scope="row">Elementary Education (K&ndash;6)</th><td><code>00025</code></td></tr>
+            <tr><th scope="row">Elementary Second Language [ESL] (K&ndash;6)</th><td><code>25110</code></td></tr>
+            <tr><th scope="row">Elementary Math (K&ndash;6) Add-On</th><td><code>25200</code></td></tr>
+            <tr><th scope="row">Elementary Science (K&ndash;6) Add-On</th><td><code>25300</code></td></tr>
+            <tr><th scope="row">Reading (K&ndash;6)</th><td><code>25190</code></td></tr>
+            <tr><th scope="row">Special Education: General Curriculum (K&ndash;6)</th><td><code>25881</code></td></tr>
+            <tr><th scope="row">Special Education: Adapted Curriculum (K&ndash;6)</th><td><code>25882</code></td></tr>
+            <tr><th scope="row">Art (K&ndash;12)</th><td><code>00810</code></td></tr>
+            <tr><th scope="row">Music (K&ndash;12)</th><td><code>00800</code></td></tr>
+            <tr><th scope="row">Dance (K&ndash;12)</th><td><code>00805</code></td></tr>
+            <tr><th scope="row">Theatre Arts (K&ndash;12)</th><td><code>00108</code></td></tr>
+            <tr><th scope="row">Health Specialist (K&ndash;12)</th><td><code>00098</code></td></tr>
+            <tr><th scope="row">Physical Education (K&ndash;12)</th><td><code>00090</code></td></tr>
+            <tr><th scope="row">Health &amp; Physical Education (K&ndash;12)</th><td><code>00095</code></td></tr>
+            <tr><th scope="row">Reading (K&ndash;12)</th><td><code>00190</code></td></tr>
+            <tr><th scope="row">Safety &amp; Driver Education</th><td><code>00096</code></td></tr>
+            <tr><th scope="row">Speech Communication (K&ndash;12)</th><td><code>00109</code></td></tr>
+            <tr><th scope="row">ESL (K&ndash;12)</th><td><code>00110</code></td></tr>
+            <tr><th scope="row">American Sign Language (K&ndash;12)</th><td><code>00597</code></td></tr><!-- spelling fix: source had "Langauge" -->
+            <tr><th scope="row">French (K&ndash;12)</th><td><code>00511</code></td></tr>
+            <tr><th scope="row">Spanish (K&ndash;12)</th><td><code>00521</code></td></tr>
+            <tr><th scope="row">German (K&ndash;12)</th><td><code>00531</code></td></tr>
+            <tr><th scope="row">Japanese (K&ndash;12)</th><td><code>00541</code></td></tr>
+            <tr><th scope="row">Russian (K&ndash;12)</th><td><code>00581</code></td></tr>
+            <tr><th scope="row">Arabic (K&ndash;12)</th><td><code>00582</code></td></tr>
+            <tr><th scope="row">Cherokee (K&ndash;12)</th><td><code>00583</code></td></tr>
+            <tr><th scope="row">Chinese (K&ndash;12)</th><td><code>00551</code></td></tr>
+            <tr><th scope="row">Greek (Ancient) (K&ndash;12)</th><td><code>00586</code></td></tr>
+            <tr><th scope="row">Greek (Modern) (K&ndash;12)</th><td><code>00587</code></td></tr>
+            <tr><th scope="row">Hebrew (K&ndash;12)</th><td><code>00588</code></td></tr>
+            <tr><th scope="row">Hindi (K&ndash;12)</th><td><code>00589</code></td></tr>
+            <tr><th scope="row">Italian (K&ndash;12)</th><td><code>00561</code></td></tr>
+            <tr><th scope="row">Korean (K&ndash;12)</th><td><code>00592</code></td></tr>
+            <tr><th scope="row">Latin (K&ndash;12)</th><td><code>00593</code></td></tr>
+            <tr><th scope="row">Portuguese (K&ndash;12)</th><td><code>00594</code></td></tr>
+            <tr><th scope="row">Swahili (K&ndash;12)</th><td><code>00595</code></td></tr>
+            <tr><th scope="row">Turkish (K&ndash;12)</th><td><code>00596</code></td></tr>
+            <tr><th scope="row">Computer Education (K&ndash;12) &mdash; endorsement only</th><td><code>18079</code></td></tr>
+            <tr><th scope="row">Junior ROTC</th><td><code>00999</code></td></tr>
+            <tr><th scope="row">Other Foreign Languages (K&ndash;12)</th><td><code>00585</code></td></tr>
+            <tr><th scope="row">English (9&ndash;12)</th><td><code>00100</code></td></tr>
+            <tr><th scope="row">Mathematics (9&ndash;12)</th><td><code>00200</code></td></tr>
+            <tr><th scope="row">Science (9&ndash;12)</th><td><code>00300</code></td></tr>
+            <tr><th scope="row">Earth Science (9&ndash;12)</th><td><code>00302</code></td></tr>
+            <tr><th scope="row">Biology (9&ndash;12)</th><td><code>00310</code></td></tr>
+            <tr><th scope="row">Physics (9&ndash;12)</th><td><code>00320</code></td></tr>
+            <tr><th scope="row">Chemistry (9&ndash;12)</th><td><code>00330</code></td></tr>
+            <tr><th scope="row">Social Studies (9&ndash;12)</th><td><code>00400</code></td></tr>
+            <tr><th scope="row">Political Science (9&ndash;12)</th><td><code>00405</code></td></tr>
+            <tr><th scope="row">Geography (9&ndash;12)</th><td><code>00410</code></td></tr>
+            <tr><th scope="row">History (9&ndash;12)</th><td><code>00420</code></td></tr>
+            <tr><th scope="row">Economics (9&ndash;12)</th><td><code>00431</code></td></tr>
+            <tr><th scope="row">Sociology (9&ndash;12)</th><td><code>00432</code></td></tr>
+            <tr><th scope="row">Anthropology (9&ndash;12)</th><td><code>00433</code></td></tr>
+            <tr><th scope="row">French (9&ndash;12)</th><td><code>00510</code></td></tr>
+            <tr><th scope="row">Spanish (9&ndash;12)</th><td><code>00520</code></td></tr>
+            <tr><th scope="row">German (9&ndash;12)</th><td><code>00530</code></td></tr>
+            <tr><th scope="row">Japanese (9&ndash;12)</th><td><code>00540</code></td></tr>
+            <tr><th scope="row">Russian (9&ndash;12)</th><td><code>00580</code></td></tr>
+            <tr><th scope="row">Latin (9&ndash;12)</th><td><code>00590</code></td></tr>
+            <tr><th scope="row">Bible (9&ndash;12)</th><td><code>00905</code></td></tr>
+            <tr><th scope="row">Journalism (9&ndash;12)</th><td><code>18105</code></td></tr>
+            <tr><th scope="row">Chinese (9&ndash;12)</th><td><code>00550</code></td></tr>
+            <tr><th scope="row">Language Arts (Middle Grades)</th><td><code>78180</code></td></tr>
+            <tr><th scope="row">Mathematics (Middle Grades)</th><td><code>78200</code></td></tr>
+            <tr><th scope="row">Science (Middle Grades)</th><td><code>78300</code></td></tr>
+            <tr><th scope="row">Social Studies (Middle Grades)</th><td><code>78400</code></td></tr>
+            <tr><th scope="row">Specific Learning Disabled (K&ndash;12)</th><td><code>88086</code></td></tr>
+            <tr><th scope="row">Academically or Intellectually Gifted (K&ndash;12)</th><td><code>88087</code></td></tr>
+            <tr><th scope="row">Deaf and Hard of Hearing (K&ndash;12)</th><td><code>88088</code></td></tr>
+            <tr><th scope="row">Special Education: General Curriculum (K&ndash;12)</th><td><code>88091</code></td></tr>
+            <tr><th scope="row">Special Education: Adapted Curriculum (K&ndash;12)</th><td><code>88092</code></td></tr>
+            <tr><th scope="row">Cross Categorical (mildly / moderately disabled) (K&ndash;12)</th><td><code>88001</code></td></tr>
+            <tr><th scope="row">Severely / Profoundly Disabled (K&ndash;12)</th><td><code>88002</code></td></tr>
+            <tr><th scope="row">Mentally Disabled (K&ndash;12)</th><td><code>88081</code></td></tr>
+            <tr><th scope="row">Visually Impaired (K&ndash;12)</th><td><code>88083</code></td></tr>
+            <tr><th scope="row">Behaviorally / Emotionally Disabled (K&ndash;12)</th><td><code>88085</code></td></tr>
+            <tr><th scope="row">CTE: Agricultural Education</th><td><code>00700</code></td></tr>
+            <tr><th scope="row">CTE: Business &amp; Information Technology Education</th><td><code>00760</code></td></tr>
+            <tr><th scope="row">CTE: Career Development Coordinator</th><td><code>00747</code></td></tr>
+            <tr><th scope="row">CTE: Family &amp; Consumer Sciences</th><td><code>00710</code></td></tr>
+            <tr><th scope="row">CTE: Health Sciences Education &mdash; RN</th><td><code>00720</code></td></tr>
+            <tr><th scope="row">CTE: Health Sciences Education &mdash; non-RN</th><td><code>00721</code></td></tr>
+            <tr><th scope="row">CTE: Health Sciences Education &mdash; Biotech</th><td><code>00722</code></td></tr>
+            <tr><th scope="row">CTE: Marketing Education</th><td><code>00730</code></td></tr>
+            <tr><th scope="row">CTE: Technology Education</th><td><code>00820</code></td></tr>
+            <tr><th scope="row">CTE: Trade &amp; Industrial Education</th><td><code>00740</code></td></tr>
+            <tr><th scope="row">Administrative: Superintendent</th><td><code>00011</code></td></tr>
+            <tr><th scope="row">Administrative: Principal</th><td><code>00012</code></td></tr>
+            <tr><th scope="row">Administrative: Curriculum Instructional Specialist</th><td><code>00113</code></td></tr>
+            <tr><th scope="row">Administrative: Instructional Technology Specialist &mdash; Computers</th><td><code>00077</code></td></tr>
+            <tr><th scope="row">Administrative: Exceptional Children&rsquo;s Program Administrator</th><td><code>88099</code></td></tr>
+            <tr><th scope="row">School Counselor</th><td><code>00005</code></td></tr>
+            <tr><th scope="row">School Social Worker</th><td><code>00006</code></td></tr>
+            <tr><th scope="row">School Psychologist</th><td><code>00026</code></td></tr>
+            <tr><th scope="row">Instructional Technology Specialist &mdash; Telecommunications</th><td><code>00074</code></td></tr>
+            <tr><th scope="row">Media Coordinator</th><td><code>00076</code></td></tr>
+            <tr><th scope="row">Audiologist</th><td><code>88003</code></td></tr>
+            <tr><th scope="row">Speech-Language Pathologist (NCBOESLPA Licensure)</th><td><code>88082</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         Changelog
+         ================================================================= -->
+    <section class="changelog" aria-labelledby="changelog">
+      <h2 id="changelog">Changelog</h2>
+
+      <h3>2025&ndash;2026 reporting cycle</h3>
+      <p class="date">May&nbsp;7, 2026</p>
+      <ul>
+        <li>Initial release as an accessible HTML document (replaces the prior Word-only distribution).</li>
+        <li>Editorial pass: standardized headings, normalized spacing and tables, removed duplicated narrative.</li>
+        <li>Aligned variable names between Tables&nbsp;2 and 3 &mdash; applicant Race &rarr; Ethnicity; student Instcode &rarr; EPP Code, Instname &rarr; EPP Name, Lastname &rarr; Last Name, Firstname &rarr; First Name. Gender values in Table&nbsp;2 expanded to F / M / O to match Table&nbsp;3.</li>
+        <li>Split Application Date and Accepted Date in the applicant template into separate Month and Year columns (mirroring the DOB split).</li>
+        <li>Centralized the &ldquo;email Andrew Sioberg after every upload to confirm&rdquo; instruction into one global note at the start of Section&nbsp;C.</li>
+        <li>Removed the deprecated <em>Zipcode</em> row from Table&nbsp;3 (was struck through and red in the prior Word version).</li>
+        <li>Replaced color-only emphasis with a <span class="legend-swatch">NEW 2025-26</span> badge plus dark red text (WCAG&nbsp;2.1 SC&nbsp;1.4.1 Use of Color).</li>
+        <li>Added skip-to-main-content link, table captions, <code>scope</code> attributes, and explicit alt text on all screenshots.</li>
+        <li>All five table titles now render in NCDPI navy for visual consistency, regardless of heading level.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="questions">
+      <h2 id="questions">Questions?</h2>
+      <p>Contact the NCDPI Educator Preparation Team at <a href="mailto:andrew.sioberg@dpi.nc.gov">andrew.sioberg@dpi.nc.gov</a> or <a href="mailto:patrick.dougherty@dpi.nc.gov">patrick.dougherty@dpi.nc.gov</a>.</p>
+    </section>
+
+    <p class="last-updated">Last updated: May&nbsp;7, 2026</p>
+
+  </main>
+</body>
+</html>
