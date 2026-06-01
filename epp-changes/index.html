@@ -623,6 +623,22 @@
               </span>
             </label>
           </div>
+
+          <div class="field">
+            <label for="signature-name">
+              Signature &mdash; type your full name
+              <span class="required-marker" aria-hidden="true">*</span>
+            </label>
+            <p class="label-hint" id="signature-name-hint">
+              Typing your full name here serves as your electronic signature.
+            </p>
+            <input type="text" id="signature-name" name="signatureName" required aria-required="true" autocomplete="name" aria-describedby="signature-name-hint">
+          </div>
+
+          <div class="field">
+            <span class="label-as-text">Signed on</span>
+            <div class="field-readonly" id="signature-date">&mdash;</div>
+          </div>
         </fieldset>
 
         <div id="form-error" class="error-message" role="alert" hidden></div>
@@ -812,6 +828,7 @@
 
       document.getElementById('submission-date').textContent = todayISO();
       document.getElementById('submission-epp').textContent = session.epp.name;
+      document.getElementById('signature-date').textContent = todayISO();
       showScreen('form');
     });
 
@@ -854,9 +871,9 @@
       wrap.dataset.kind = kind;
       wrap.dataset.rid = rid;
 
-      const typeRadios = PROGRAM_TYPES.map(t => `
+      const typeChoices = PROGRAM_TYPES.map(t => `
         <label class="choice">
-          <input type="radio" name="${rid}-type" value="${t.code}" required>
+          <input type="checkbox" name="${rid}-type" value="${t.code}">
           ${t.label}
         </label>
       `).join('');
@@ -907,11 +924,12 @@
         </div>
         <div class="field">
           <div class="label-as-text" id="${rid}-type-label">
-            Program type
+            Program type(s)
             <span class="required-marker" aria-hidden="true">*</span>
           </div>
-          <div class="choice-group" role="radiogroup" aria-labelledby="${rid}-type-label">
-            ${typeRadios}
+          <p class="label-hint" id="${rid}-type-hint">Select all that apply.</p>
+          <div class="choice-group" role="group" aria-labelledby="${rid}-type-label" aria-describedby="${rid}-type-hint" data-type-group="${rid}">
+            ${typeChoices}
           </div>
         </div>
         ${extraForRemoving}
@@ -981,6 +999,29 @@
         return;
       }
 
+      // Custom check: each program row must have at least one program type
+      // selected. Native required-validation can't express "at least one of a
+      // checkbox group", so we enforce it here.
+      const typeless = [];
+      document.querySelectorAll('#change-form .program-row').forEach(row => {
+        const rid = row.dataset.rid;
+        const checked = row.querySelectorAll(`input[name="${rid}-type"]:checked`).length;
+        const group = row.querySelector(`[data-type-group="${rid}"]`);
+        if (checked === 0) {
+          typeless.push(row);
+          if (group) group.setAttribute('aria-invalid', 'true');
+        } else if (group) {
+          group.removeAttribute('aria-invalid');
+        }
+      });
+      if (typeless.length > 0) {
+        const firstBox = typeless[0].querySelector('input[type="checkbox"]');
+        if (firstBox) firstBox.focus({ preventScroll: false });
+        err.textContent = `Please select at least one program type for each program. (${typeless.length} program${typeless.length === 1 ? '' : 's'} missing a type.)`;
+        err.hidden = false;
+        return;
+      }
+
       buildReview();
       showScreen('review');
     });
@@ -1019,7 +1060,7 @@
                 <strong>Program ${idx + 1}</strong>
                 <dl>
                   <dt>License area</dt><dd>${escapeHtml(row.querySelector(`#${rid}-area`).value)}</dd>
-                  <dt>Type</dt><dd>${escapeHtml(typeLabel(row.querySelector(`input[name="${rid}-type"]:checked`)?.value))}</dd>
+                  <dt>Type(s)</dt><dd>${escapeHtml(typeLabelsForRow(rid))}</dd>
                 </dl>
               </div>
             `);
@@ -1045,7 +1086,7 @@
                 <strong>Program ${idx + 1}</strong>
                 <dl>
                   <dt>License area</dt><dd>${escapeHtml(row.querySelector(`#${rid}-area`).value)}</dd>
-                  <dt>Type</dt><dd>${escapeHtml(typeLabel(row.querySelector(`input[name="${rid}-type"]:checked`)?.value))}</dd>
+                  <dt>Type(s)</dt><dd>${escapeHtml(typeLabelsForRow(rid))}</dd>
                   <dt>Last enrollment date</dt><dd>${escapeHtml(row.querySelector(`#${rid}-lastenroll`).value)}</dd>
                   <dt># expected completers</dt><dd>${escapeHtml(row.querySelector(`#${rid}-candcount`).value)}</dd>
                   <dt>Candidates</dt><dd>${candidates || '<em>none listed</em>'}</dd>
@@ -1067,6 +1108,10 @@
         <div class="summary-block">
           <h3>Attestation</h3>
           <p>${data.get('attestation') ? '&#10003; Confirmed.' : 'Not confirmed.'}</p>
+          <dl>
+            <dt>Signature</dt><dd>${escapeHtml(data.get('signatureName') || '')}</dd>
+            <dt>Signed on</dt><dd>${escapeHtml(document.getElementById('signature-date').textContent)}</dd>
+          </dl>
         </div>
       `);
 
@@ -1076,6 +1121,19 @@
     function typeLabel(code) {
       const t = PROGRAM_TYPES.find(x => x.code === code);
       return t ? t.label : '';
+    }
+
+    // Values of every checked program-type checkbox in a row, e.g. ['R','M'].
+    function checkedTypes(rid) {
+      return Array.from(
+        document.querySelectorAll(`input[name="${rid}-type"]:checked`)
+      ).map(el => el.value);
+    }
+
+    // The checked types for a row as display labels, joined for the review
+    // screen, e.g. "Residency (R), Masters (M)".
+    function typeLabelsForRow(rid) {
+      return checkedTypes(rid).map(typeLabel).join(', ');
     }
 
     function escapeHtml(s) {
@@ -1104,7 +1162,7 @@
         const rid = row.dataset.rid;
         adding.push({
           licenseArea: row.querySelector(`#${rid}-area`).value,
-          type: row.querySelector(`input[name="${rid}-type"]:checked`)?.value || ''
+          types: checkedTypes(rid)
         });
       });
 
@@ -1113,7 +1171,7 @@
         const rid = row.dataset.rid;
         removing.push({
           licenseArea: row.querySelector(`#${rid}-area`).value,
-          type: row.querySelector(`input[name="${rid}-type"]:checked`)?.value || '',
+          types: checkedTypes(rid),
           lastEnrollmentDate: row.querySelector(`#${rid}-lastenroll`).value,
           candidateCount: parseInt(row.querySelector(`#${rid}-candcount`).value, 10) || 0,
           candidates: row.querySelector(`#${rid}-candidates`).value
@@ -1126,7 +1184,9 @@
         adding:   data.get('addingPrograms')   === 'yes' ? adding   : [],
         removing: data.get('removingPrograms') === 'yes' ? removing : [],
         governanceApproved: data.get('governanceApproved') || '',
-        attestationConfirmed: !!data.get('attestation')
+        attestationConfirmed: !!data.get('attestation'),
+        signatureName: data.get('signatureName') || '',
+        signatureDate: document.getElementById('signature-date').textContent || ''
       };
     }
 
