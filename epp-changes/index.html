@@ -6,20 +6,24 @@
   <title>EPP Program Change Notification &mdash; NCDPI</title>
 
   <!--
-    EPP Program Change Notification — MOCKUP
-    =========================================
-    This is the Phase 2 mockup for Andy's review.
+    EPP Program Change Notification
+    ===============================
+    Single-file frontend (inline CSS + JS, no build step). With APP_SCRIPT_URL
+    set it talks to the Apps Script backend; with it blank it runs in mockup
+    mode (any non-empty credentials sign in, built-in sample lists, submit
+    just advances to the success screen).
 
-    NO real authentication, NO real submission. Any non-empty username and
-    password will "sign in" with a placeholder EPP name. The submit button
-    advances to the success screen without doing anything.
+    License areas are chosen from a grouped dropdown, not typed. The lists
+    arrive with the login response (see apps-script-backend.gs). The
+    "removing" dropdown is limited to the programs NCDPI has on file for the
+    signed-in EPP, falling back to the full list with a note.
 
     Styling follows the NCDPI tokens already in use in:
       - _Reference/_StyleGuide/index.html
       - _Reference/_ReportingGuide/reporting-process-guide.html
 
     Author: Andy Baxter (NCDPI Educator Preparation)
-    Last updated: 2026-05-18
+    Last updated: 2026-09-09 (license-area dropdowns)
   -->
 
   <style>
@@ -270,6 +274,7 @@
     .panel.panel-pii h4 { color: #922880; }
 
     /* --- Error message --------------------------------------------------- */
+    .error-message:focus { outline: 3px solid #FFD100; outline-offset: 2px; }
     .error-message {
       color: #B30000;
       background-color: #FCEAEA;
@@ -573,6 +578,11 @@
               NCDPI and stored alongside your EPP's other candidate records.
             </p>
 
+            <p class="label-hint" id="removing-fallback-note" hidden>
+              We don't have a program list on file for your EPP yet, so the
+              full list of license areas is shown.
+            </p>
+
             <p class="label-hint">
               List each program separately. Click "Add another program" to add
               more.
@@ -664,6 +674,9 @@
 
       <div id="review-content"></div>
 
+      <!-- Stays on screen after a refused or failed submit (was an alert). -->
+      <div id="submit-error" class="error-message" role="alert" tabindex="-1" hidden></div>
+
       <div class="button-row">
         <button type="button" class="btn-primary" data-action="submit-final">
           Submit to NCDPI
@@ -738,10 +751,41 @@
       { code: 'AO', label: 'Add-On (AO)' }
     ];
 
+    // ---- Sample license areas for mockup mode ----------------------------
+    // Real codes/names/groups from DIM_LicenseAreas, chosen to exercise the
+    // dropdown: several groups, and duplicate names that only the code tells
+    // apart (Latin 00590/00593, Business Education 00600/00760). In
+    // production the backend sends the full list with the login response.
+    const MOCK_LICENSE_AREAS = [
+      { code: '00014', name: 'Birth through Kindergarten',       group: 'Elementary' },
+      { code: '00024', name: 'Elementary (grades K-6)',          group: 'Elementary' },
+      { code: '78200', name: 'M.G. Math',                        group: 'Middle Grades (6-9)' },
+      { code: '78300', name: 'M.G. Science',                     group: 'Middle Grades (6-9)' },
+      { code: '00600', name: 'Business Education',               group: 'Secondary (9-12)' },
+      { code: '00100', name: 'English',                          group: 'Secondary (9-12)' },
+      { code: '00590', name: 'Latin',                            group: 'Secondary (9-12)' },
+      { code: '00593', name: 'Latin',                            group: 'Secondary (9-12)' },
+      { code: '00200', name: 'Math (grades 9-12)',               group: 'Secondary (9-12)' },
+      { code: '00810', name: 'Art',                              group: 'Special Subjects (K-12)' },
+      { code: '00110', name: 'ESL',                              group: 'Special Subjects (K-12)' },
+      { code: '88091', name: 'Spec Ed: General Curriculum',      group: 'Special Education' },
+      { code: '00760', name: 'Business Education',               group: 'Career-Technical Ed' },
+      // addable:false mirrors Form IS-K's "^" marker (no NEW licenses
+      // established). CTE is where almost all of the real ones are. It is in
+      // MOCK_EPP_PROGRAM_CODES too, so the mockup shows the case that matters:
+      // absent from ADDING, present for REMOVING.
+      { code: '00716', name: 'Foods & Nutrition, Culinary Arts', group: 'Career-Technical Ed',
+        addable: false }
+    ];
+    // Codes the demo EPP "offers" — drives the mockup's removing dropdown.
+    const MOCK_EPP_PROGRAM_CODES = ['00024', '00200', '00590', '00716'];
+
     // ---- Session state --------------------------------------------------
     // credentials are kept in memory so submit can re-validate against the
     // backend; they are cleared on sign-out and never persisted to storage.
-    const session = { credentials: null, epp: null };
+    // licenseAreas / eppPrograms are the dropdown lists from the login
+    // response: the full list (adding) and this EPP's programs (removing).
+    const session = { credentials: null, epp: null, licenseAreas: [], eppPrograms: [] };
 
     // ---- POST helper ----------------------------------------------------
     // Apps Script web apps don't handle CORS preflight, so we send the body
@@ -809,6 +853,20 @@
           }
           session.credentials = { username: u, password: p };
           session.epp = { code: result.epp.code, name: result.epp.name };
+          session.licenseAreas = Array.isArray(result.licenseAreas) ? result.licenseAreas : [];
+          session.eppPrograms  = Array.isArray(result.eppPrograms)  ? result.eppPrograms  : [];
+          if (session.licenseAreas.length === 0) {
+            // The backend refuses logins without the list; belt and braces
+            // here so the form is never shown with an empty dropdown. Same
+            // sentence as LIST_UNAVAILABLE_MESSAGE in apps-script-backend.gs
+            // — keep the two in step.
+            session.credentials = null;
+            session.epp = null;
+            // Keep this sentence in step with LIST_UNAVAILABLE_MESSAGE in apps-script-backend.gs.
+            err.textContent = 'The license-area list is not available right now, so the form cannot be used. Please email Kim Evans (kimberly.evans@dpi.nc.gov).';
+            err.hidden = false;
+            return;
+          }
         } catch (ex) {
           err.textContent = 'Could not reach the server. Please try again. (' + ex.message + ')';
           err.hidden = false;
@@ -824,7 +882,13 @@
           code: '000',
           name: '[Demo] ' + u.replace(/^./, c => c.toUpperCase()) + ' University'
         };
+        session.licenseAreas = MOCK_LICENSE_AREAS.slice();
+        session.eppPrograms  = MOCK_LICENSE_AREAS.filter(a => MOCK_EPP_PROGRAM_CODES.includes(a.code));
       }
+
+      // No program list on file for this EPP: the removing dropdown shows the
+      // full list, and this note says why.
+      document.getElementById('removing-fallback-note').hidden = session.eppPrograms.length > 0;
 
       document.getElementById('submission-date').textContent = todayISO();
       document.getElementById('submission-epp').textContent = session.epp.name;
@@ -833,22 +897,21 @@
     });
 
     // ---- Toggle adding / removing program lists ------------------------
-    document.querySelectorAll('input[name="addingPrograms"]').forEach(r => {
-      r.addEventListener('change', () => {
-        const show = r.value === 'yes' && r.checked;
-        document.getElementById('adding-list-wrap').hidden = !show;
-        if (show && document.querySelectorAll('#adding-list .program-row').length === 0) {
-          addProgramRow('adding');
-        }
-      });
-    });
-    document.querySelectorAll('input[name="removingPrograms"]').forEach(r => {
-      r.addEventListener('change', () => {
-        const show = r.value === 'yes' && r.checked;
-        document.getElementById('removing-list-wrap').hidden = !show;
-        if (show && document.querySelectorAll('#removing-list .program-row').length === 0) {
-          addProgramRow('removing');
-        }
+    // Answering "No" also drops any rows. A row left behind under a hidden
+    // wrapper still carried `required` controls: validation counted them,
+    // nothing on screen could be fixed or focused, and the EPP could never
+    // reach the review screen (found in the 2026-09-09 review).
+    ['adding', 'removing'].forEach(kind => {
+      document.querySelectorAll(`input[name="${kind}Programs"]`).forEach(r => {
+        r.addEventListener('change', () => {
+          const show = r.value === 'yes' && r.checked;
+          document.getElementById(`${kind}-list-wrap`).hidden = !show;
+          if (!show) {
+            document.getElementById(`${kind}-list`).innerHTML = '';
+          } else if (document.querySelectorAll(`#${kind}-list .program-row`).length === 0) {
+            addProgramRow(kind);
+          }
+        });
       });
     });
 
@@ -909,6 +972,20 @@
 
       const removeBtn = `<button type="button" class="btn-danger-ghost" data-action="remove-row" data-rid="${rid}">Remove this program</button>`;
 
+      // Which list this row's dropdown shows, and a hint that describes THAT
+      // list (a removing row usually shows only the EPP's own programs). The
+      // address is plain text on purpose: a link here would add one tab stop
+      // per row between "Remove this program" and the dropdown.
+      const usingEppList = kind === 'removing' && session.eppPrograms.length > 0;
+      const areaList = kind === 'removing' ? removalList() : additionList();
+      const areaHint = usingEppList
+        ? 'Choose from the programs NCDPI has on file for your EPP. Don\'t see it? Email Kim Evans (kimberly.evans@dpi.nc.gov) before submitting.'
+        : 'Choose from the NCDPI list. Don\'t see your license area? Email Kim Evans (kimberly.evans@dpi.nc.gov) before submitting.';
+      // A removing row that shows the full list also points screen readers
+      // at the note explaining why.
+      const areaDescribedBy = `${rid}-area-hint` +
+        ((kind === 'removing' && !usingEppList) ? ' removing-fallback-note' : '');
+
       wrap.innerHTML = `
         <div class="program-row-header">
           <h4>Program <span class="row-number">${list.children.length + 1}</span></h4>
@@ -919,8 +996,8 @@
             License area
             <span class="required-marker" aria-hidden="true">*</span>
           </label>
-          <p class="label-hint" id="${rid}-area-hint">e.g., Elementary Education, Middle Grades Math.</p>
-          <input type="text" id="${rid}-area" name="${rid}-area" required aria-required="true" aria-describedby="${rid}-area-hint">
+          <p class="label-hint" id="${rid}-area-hint">${areaHint}</p>
+          ${buildAreaSelect(rid, areaList, areaDescribedBy)}
         </div>
         <div class="field">
           <div class="label-as-text" id="${rid}-type-label">
@@ -947,10 +1024,95 @@
         announce(`Program removed. ${document.querySelectorAll(`#${kind}-list .program-row`).length} remaining.`);
       });
 
-      // Announce the new row and focus its first input for keyboard users.
+      // Announce the new row and focus its first control (the license-area
+      // dropdown) for keyboard users.
       const count = list.querySelectorAll('.program-row').length;
-      announce(`Program ${count} added. Use the inputs to fill in the program's details.`);
-      wrap.querySelector('input[type="text"]').focus();
+      announce(`Program ${count} added. Use the controls to fill in the program's details.`);
+      wrap.querySelector('select, input[type="text"]').focus();
+    }
+
+    // ---- License-area dropdown helpers ----------------------------------
+    // The "removing" dropdown lists only the programs NCDPI has on file for
+    // this EPP. With nothing on file (new EPP, or the list is behind) it
+    // falls back to the full list; #removing-fallback-note explains why.
+    function removalList() {
+      return session.eppPrograms.length > 0 ? session.eppPrograms : session.licenseAreas;
+    }
+
+    // The "adding" dropdown drops areas Form IS-K marks "^" — NCDPI
+    // establishes no new licenses there, so a new program preparing
+    // candidates for one cannot be approved. They stay in session.licenseAreas
+    // (and so in removalList() and areaByCode()) because an EPP must still be
+    // able to RETIRE such a program, and the review screen has to be able to
+    // name it. A list served by a backend older than 2026-09-10 carries no
+    // `addable` key at all; `!== false` keeps every one of those addable.
+    function additionList() {
+      return session.licenseAreas.filter(a => a.addable !== false);
+    }
+
+    // Option text is "Name (code)". The code is not decoration: the NCDPI
+    // list has the same name under different codes (Latin 00590/00593,
+    // Business Education 00600 secondary / 00760 CTE, …).
+    function areaLabel(area) {
+      return `${area.name} (${area.code})`;
+    }
+
+    function areaByCode(code) {
+      return session.licenseAreas.find(a => a.code === code) || null;
+    }
+
+    // The selected area for a row as {code, name, group}, or null while the
+    // placeholder is still selected. Falls back to the option's own text if
+    // the code is somehow not in the session list.
+    function selectedArea(rid) {
+      const sel = document.getElementById(`${rid}-area`);
+      if (!sel || !sel.value) return null;
+      const found = areaByCode(sel.value);
+      if (found) return found;
+      const opt = sel.options[sel.selectedIndex];
+      return {
+        code: sel.value,
+        name: opt.textContent.replace(/\s*\([^()]*\)\s*$/, ''),
+        group: (opt.parentElement && opt.parentElement.label) || ''
+      };
+    }
+
+    // Review-screen text: "Business Education (00760) — Career-Technical Ed".
+    // In the dropdown the <optgroup> heading carries the group; on the review
+    // screen there is no heading, so the group rides along in the text — it
+    // is the only human-readable way to tell duplicate names apart. The
+    // backend email prints the same string (areaLine in the .gs).
+    function areaDisplay(area) {
+      return area.group ? `${areaLabel(area)} — ${area.group}` : areaLabel(area);
+    }
+
+    function areaDisplayForRow(rid) {
+      const a = selectedArea(rid);
+      return a ? areaDisplay(a) : '';
+    }
+
+    // A grouped <select>: one <optgroup> per license group, in list order
+    // (the list arrives already sorted for display). The placeholder has
+    // value="" so native `required` validation catches an untouched row.
+    // `describedBy` defaults to the row's hint; callers may add more ids.
+    function buildAreaSelect(rid, list, describedBy) {
+      const described = describedBy || (rid + '-area-hint');
+      const groups = [];
+      const byGroup = new Map();
+      list.forEach(a => {
+        const g = a.group || 'Other';
+        if (!byGroup.has(g)) { byGroup.set(g, []); groups.push(g); }
+        byGroup.get(g).push(a);
+      });
+      const options = groups.map(g =>
+        `<optgroup label="${escapeHtml(g)}">` +
+        byGroup.get(g).map(a =>
+          `<option value="${escapeHtml(a.code)}">${escapeHtml(areaLabel(a))}</option>`
+        ).join('') +
+        `</optgroup>`
+      ).join('');
+      return `<select id="${rid}-area" name="${rid}-area" required aria-required="true" aria-describedby="${described}">` +
+        `<option value="">Select a license area…</option>${options}</select>`;
     }
 
     // ---- Accessibility announcer ---------------------------------------
@@ -1059,7 +1221,7 @@
               <div class="program-summary">
                 <strong>Program ${idx + 1}</strong>
                 <dl>
-                  <dt>License area</dt><dd>${escapeHtml(row.querySelector(`#${rid}-area`).value)}</dd>
+                  <dt>License area</dt><dd>${escapeHtml(areaDisplayForRow(rid))}</dd>
                   <dt>Type(s)</dt><dd>${escapeHtml(typeLabelsForRow(rid))}</dd>
                 </dl>
               </div>
@@ -1085,7 +1247,7 @@
               <div class="program-summary">
                 <strong>Program ${idx + 1}</strong>
                 <dl>
-                  <dt>License area</dt><dd>${escapeHtml(row.querySelector(`#${rid}-area`).value)}</dd>
+                  <dt>License area</dt><dd>${escapeHtml(areaDisplayForRow(rid))}</dd>
                   <dt>Type(s)</dt><dd>${escapeHtml(typeLabelsForRow(rid))}</dd>
                   <dt>Last enrollment date</dt><dd>${escapeHtml(row.querySelector(`#${rid}-lastenroll`).value)}</dd>
                   <dt># expected completers</dt><dd>${escapeHtml(row.querySelector(`#${rid}-candcount`).value)}</dd>
@@ -1116,6 +1278,7 @@
       `);
 
       document.getElementById('review-content').innerHTML = html.join('');
+      clearSubmitError();
     }
 
     function typeLabel(code) {
@@ -1146,8 +1309,28 @@
         .replaceAll("'", '&#39;');
     }
 
+    // ---- Submit errors ---------------------------------------------------
+    // A rejected or failed submit used to be an alert(): dismissed, gone,
+    // and the review screen looked exactly as before. The backend now has
+    // real reasons to refuse (an unrecognized license-area code, an
+    // out-of-date copy of the form), so the message stays on screen in a
+    // live region and takes focus.
+    function showSubmitError(message) {
+      const el = document.getElementById('submit-error');
+      el.textContent = message;
+      el.hidden = false;
+      el.focus({ preventScroll: false });
+    }
+
+    function clearSubmitError() {
+      const el = document.getElementById('submit-error');
+      el.textContent = '';
+      el.hidden = true;
+    }
+
     // ---- Review -> back to form -----------------------------------------
     document.querySelector('[data-action="back-to-form"]').addEventListener('click', () => {
+      clearSubmitError();
       showScreen('form');
       announce('Returned to the form. Your entries are preserved.');
     });
@@ -1160,8 +1343,11 @@
       const adding = [];
       document.querySelectorAll('#adding-list .program-row').forEach(row => {
         const rid = row.dataset.rid;
+        const area = selectedArea(rid) || { code: '', name: '', group: '' };
         adding.push({
-          licenseArea: row.querySelector(`#${rid}-area`).value,
+          licenseAreaCode: area.code,   // the key NCDPI matches on
+          licenseArea: area.name,       // kept so old and new rows read alike
+          licenseGroup: area.group,
           types: checkedTypes(rid)
         });
       });
@@ -1169,8 +1355,11 @@
       const removing = [];
       document.querySelectorAll('#removing-list .program-row').forEach(row => {
         const rid = row.dataset.rid;
+        const area = selectedArea(rid) || { code: '', name: '', group: '' };
         removing.push({
-          licenseArea: row.querySelector(`#${rid}-area`).value,
+          licenseAreaCode: area.code,
+          licenseArea: area.name,
+          licenseGroup: area.group,
           types: checkedTypes(rid),
           lastEnrollmentDate: row.querySelector(`#${rid}-lastenroll`).value,
           candidateCount: parseInt(row.querySelector(`#${rid}-candcount`).value, 10) || 0,
@@ -1204,11 +1393,11 @@
             submission: buildSubmissionPayload()
           });
           if (!result.ok) {
-            alert('Submission failed: ' + (result.error || 'unknown error'));
+            showSubmitError(result.error || 'Submission failed for an unknown reason. Please try again.');
             return;
           }
         } catch (ex) {
-          alert('Could not reach the server. Please try again. (' + ex.message + ')');
+          showSubmitError('Could not reach the server. Please try again. (' + ex.message + ')');
           return;
         } finally {
           btn.disabled = false;
@@ -1229,10 +1418,14 @@
         document.getElementById('removing-list').innerHTML = '';
         document.getElementById('adding-list-wrap').hidden = true;
         document.getElementById('removing-list-wrap').hidden = true;
+        document.getElementById('removing-fallback-note').hidden = true;
         document.getElementById('login-error').hidden = true;
         document.getElementById('form-error').hidden = true;
+        clearSubmitError();
         session.credentials = null;
         session.epp = null;
+        session.licenseAreas = [];
+        session.eppPrograms = [];
         showScreen('login');
       });
     });
