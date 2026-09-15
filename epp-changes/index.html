@@ -785,19 +785,73 @@
     // backend; they are cleared on sign-out and never persisted to storage.
     // licenseAreas / eppPrograms are the dropdown lists from the login
     // response: the full list (adding) and this EPP's programs (removing).
-    const session = { credentials: null, epp: null, licenseAreas: [], eppPrograms: [] };
+    // submissionId is minted the first time "Submit to NCDPI" is clicked and
+    // reused on every retry of that same submission, so the backend can tell
+    // "sent twice" from "sent again after an edit" (see below). Cleared on
+    // success, on going back to edit, and on sign-out.
+    const session = { credentials: null, epp: null, licenseAreas: [], eppPrograms: [], submissionId: null };
 
     // ---- POST helper ----------------------------------------------------
     // Apps Script web apps don't handle CORS preflight, so we send the body
     // as text/plain (it's still JSON; the script parses it on the server).
-    async function postToBackend(action, body) {
-      const res = await fetch(APP_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(Object.assign({ action: action }, body))
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.json();
+    //
+    // RETRIES (2026-09-15). Google answers a web-app call in two hops: the
+    // script runs on script.google.com, then a 302 sends the browser to
+    // script.googleusercontent.com to collect the stored result. Measured
+    // from the devcontainer on 2026-09-15 (42 calls over 40 minutes), that
+    // second hop failed about one call in three: it hung 15-50 s and then
+    // served Google's own "Sorry, unable to open the file at this time"
+    // page (HTTP 404), or bounced through extra redirects and handed back
+    // the wrong body. The script itself had already run in about 2 s every
+    // time. None of that is ours to fix, so the page tries again: login is
+    // read-only, and a submit carries a submissionId the backend
+    // de-duplicates on, so a retry is safe for both. Each attempt is also
+    // capped so a hung hop cannot leave the button spinning for a minute.
+    const BACKEND_ATTEMPTS = 3;
+    const BACKEND_ATTEMPT_TIMEOUT_MS = 40000;
+    const BACKEND_RETRY_DELAY_MS = [1500, 3000]; // before attempt 2, before attempt 3
+
+    // onRetry(attempt, total) is called just before each re-attempt so the
+    // button can say what is happening.
+    async function postToBackend(action, body, onRetry) {
+      const payload = JSON.stringify(Object.assign({ action: action }, body));
+      let lastError = null;
+      for (let attempt = 1; attempt <= BACKEND_ATTEMPTS; attempt++) {
+        if (attempt > 1) {
+          if (onRetry) onRetry(attempt, BACKEND_ATTEMPTS);
+          await new Promise(r => setTimeout(r, BACKEND_RETRY_DELAY_MS[attempt - 2] || 3000));
+        }
+        const controller = (typeof AbortController === 'function') ? new AbortController() : null;
+        const timer = controller ? setTimeout(() => controller.abort(), BACKEND_ATTEMPT_TIMEOUT_MS) : null;
+        try {
+          const res = await fetch(APP_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: payload,
+            signal: controller ? controller.signal : undefined
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          // A reply that is not our JSON (Google's error page, or the plain
+          // "endpoint is alive" text from a redirect that lost the POST) is
+          // the second hop failing, not the script answering. Retry it.
+          let data = null;
+          try { data = await res.json(); } catch (parseErr) { data = null; }
+          if (!data || typeof data.ok !== 'boolean') throw new Error('unexpected reply from Google');
+          return data;
+        } catch (ex) {
+          lastError = (ex && ex.name === 'AbortError')
+            ? new Error('no reply after ' + Math.round(BACKEND_ATTEMPT_TIMEOUT_MS / 1000) + ' s')
+            : ex;
+        } finally {
+          if (timer) clearTimeout(timer);
+        }
+      }
+      throw new Error(lastError.message + ' after ' + BACKEND_ATTEMPTS + ' tries');
+    }
+
+    function newSubmissionId() {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+      return 'sub-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
     }
 
     // ---- Screen navigation ----------------------------------------------
@@ -845,7 +899,9 @@
         btn.disabled = true;
         btn.textContent = 'Signing in…';
         try {
-          const result = await postToBackend('login', { username: u, password: p });
+          const result = await postToBackend('login', { username: u, password: p }, (attempt, total) => {
+            btn.textContent = 'Still signing in… (try ' + attempt + ' of ' + total + ')';
+          });
           if (!result.ok) {
             err.textContent = result.error || 'Sign-in failed.';
             err.hidden = false;
@@ -1331,6 +1387,8 @@
     // ---- Review -> back to form -----------------------------------------
     document.querySelector('[data-action="back-to-form"]').addEventListener('click', () => {
       clearSubmitError();
+      // Editing may change the content, so the next submit is a new one.
+      session.submissionId = null;
       showScreen('form');
       announce('Returned to the form. Your entries are preserved.');
     });
@@ -1368,6 +1426,7 @@
       });
 
       return {
+        submissionId: session.submissionId || '',   // same value on every retry of this submission
         contactName:  data.get('contactName')  || '',
         contactEmail: data.get('contactEmail') || '',
         adding:   data.get('addingPrograms')   === 'yes' ? adding   : [],
@@ -1386,16 +1445,24 @@
       if (APP_SCRIPT_URL && session.credentials) {
         btn.disabled = true;
         btn.textContent = 'Submitting…';
+        // One id per submission, kept across automatic retries AND across the
+        // user clicking Submit again after an error. If the first attempt
+        // reached the script but Google lost the reply, the backend already
+        // has this id and answers "received" instead of recording it twice.
+        if (!session.submissionId) session.submissionId = newSubmissionId();
         try {
           const result = await postToBackend('submit', {
             username: session.credentials.username,
             password: session.credentials.password,
             submission: buildSubmissionPayload()
+          }, (attempt, total) => {
+            btn.textContent = 'Still submitting… (try ' + attempt + ' of ' + total + ')';
           });
           if (!result.ok) {
             showSubmitError(result.error || 'Submission failed for an unknown reason. Please try again.');
             return;
           }
+          session.submissionId = null;
         } catch (ex) {
           showSubmitError('Could not reach the server. Please try again. (' + ex.message + ')');
           return;
@@ -1426,6 +1493,7 @@
         session.epp = null;
         session.licenseAreas = [];
         session.eppPrograms = [];
+        session.submissionId = null;
         showScreen('login');
       });
     });
